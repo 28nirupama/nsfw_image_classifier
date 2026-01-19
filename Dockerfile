@@ -8,7 +8,13 @@ WORKDIR /app
 COPY requirements.txt .
 
 # Install the dependencies
-RUN python -m pip install --no-cache-dir -r requirements.txt
+RUN python -m pip install --upgrade pip setuptools
+
+RUN apt-get update && apt-get install -y \
+    libglib2.0-0 \
+    libsm6 \
+    libxext6 \
+    libxrender-dev
 
 
 # Copy the entire project into the container
