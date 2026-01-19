@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>NSFW / SFW Image Classifier</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+<header>NSFW / SFW Image Classifier</header>
+
+<main>
+
+    <!-- IMAGE URL SECTION -->
+    <div class="section">
+        <h2>Predict from URL</h2>
+
+        <input type="text"
+               id="imageUrl"
+               placeholder="https://example.com/image.jpg">
+
+        <button onclick="predictURL()">Predict</button>
+    </div>
+
+    <!-- IMAGE UPLOAD SECTION -->
+    <div class="section">
+        <h2>Predict from Upload</h2>
+
+        <input type="file" id="imageFile" accept="image/*">
+        <button onclick="predictUpload()">Predict</button>
+
+        <img id="preview" style="display:none;">
+    </div>
+
+    <!-- RESULT -->
+    <div class="result" id="result"></div>
+
+    <!-- REPORT BUTTON -->
+    <button id="reportBtn"
+            style="display:none; margin-top:15px;"
+            onclick="reportPrediction()">
+         Report Incorrect Prediction
+    </button>
+
+</main>
+
+<!-- JS -->
+<script src="{{ url_for('static', filename='js/app.js') }}"></script>
+
+</body>
+</html>
