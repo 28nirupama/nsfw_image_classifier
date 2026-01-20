@@ -7,15 +7,18 @@ WORKDIR /app
 # Copy the requirements.txt to the container
 COPY requirements.txt .
 
-# Install the dependencies
+# Upgrade pip and setuptools to avoid version issues
 RUN python -m pip install --upgrade pip setuptools
 
+# Install the dependencies from requirements.txt
+RUN python -m pip install --no-cache-dir -r requirements.txt
+
+# Install system dependencies needed for image processing (e.g., Pillow, OpenCV)
 RUN apt-get update && apt-get install -y \
     libglib2.0-0 \
     libsm6 \
     libxext6 \
     libxrender-dev
-
 
 # Copy the entire project into the container
 COPY . .
