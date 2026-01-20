@@ -8,13 +8,10 @@ WORKDIR /app
 COPY requirements.txt .
 
 # Upgrade pip and setuptools to avoid version issues (only once)
-RUN python -m pip install --upgrade pip setuptools
-
-# Install the dependencies from requirements.txt
-RUN python -m pip install --no-cache-dir -r requirements.txt
+RUN pip install --upgrade pip setuptools
 
 # Install system dependencies needed for image processing (e.g., Pillow, OpenCV)
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && apt-get install -y --no-install-recommends \
     libopenblas-dev \
     libomp-dev \
     libglib2.0-0 \
@@ -22,6 +19,9 @@ RUN apt-get update && apt-get install -y \
     libxext6 \
     libxrender-dev \
     && rm -rf /var/lib/apt/lists/*
+
+# Install the dependencies from requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy the entire project into the container
 COPY . .
