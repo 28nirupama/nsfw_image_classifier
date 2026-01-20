@@ -10,6 +10,11 @@ COPY requirements.txt .
 # Upgrade pip and setuptools to avoid version issues
 RUN python -m pip install --upgrade pip setuptools
 
+RUN apt-get update && apt-get install -y \
+    libopenblas-dev \
+    libomp-dev \
+    && rm -rf /var/lib/apt/lists/*
+
 # Install the dependencies from requirements.txt
 RUN python -m pip install --upgrade pip setuptools
 RUN python -m pip install --no-cache-dir Flask==2.0.1
@@ -21,10 +26,13 @@ RUN python -m pip install --no-cache-dir requests==2.26.0
 
 # Install system dependencies needed for image processing (e.g., Pillow, OpenCV)
 RUN apt-get update && apt-get install -y \
+    libopenblas-dev \
+    libomp-dev \
     libglib2.0-0 \
     libsm6 \
     libxext6 \
-    libxrender-dev
+    libxrender-dev\
+    && rm -rf /var/lib/apt/lists/*
 
 # Copy the entire project into the container
 COPY . .
