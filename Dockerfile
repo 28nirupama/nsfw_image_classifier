@@ -11,7 +11,13 @@ COPY requirements.txt .
 RUN python -m pip install --upgrade pip setuptools
 
 # Install the dependencies from requirements.txt
-RUN python -m pip install --no-cache-dir -r requirements.txt
+RUN python -m pip install --upgrade pip setuptools
+RUN python -m pip install --no-cache-dir Flask==2.0.1
+RUN python -m pip install --no-cache-dir torch==1.12.0
+RUN python -m pip install --no-cache-dir torchvision==0.10.0
+RUN python -m pip install --no-cache-dir Pillow==9.0.0
+RUN python -m pip install --no-cache-dir requests==2.26.0
+
 
 # Install system dependencies needed for image processing (e.g., Pillow, OpenCV)
 RUN apt-get update && apt-get install -y \
