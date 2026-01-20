@@ -8,8 +8,9 @@ WORKDIR /app
 COPY requirements.txt .
 
 # Upgrade pip and install dependencies
-RUN python -m pip install --upgrade pip setuptools
-RUN python -m pip install --no-cache-dir -r requirements.txt
+RUN python -m pip install --upgrade pip setuptools --timeout=600
+RUN python -m pip install --no-cache-dir -r requirements.txt --timeout=600
+
 
 # Stage 2: Final image
 FROM python:3.9-slim
