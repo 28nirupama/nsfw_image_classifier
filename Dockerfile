@@ -1,27 +1,36 @@
-# Stage 1: Build dependencies
-FROM python:3.9-slim AS build_stage  
-# Correct capitalization
-
-WORKDIR /app
-
-# Copy requirements.txt to the container
-COPY requirements.txt .
-
-# Upgrade pip and install dependencies
-RUN python -m pip install --upgrade pip setuptools --timeout=600
-RUN python -m pip install --no-cache-dir -r requirements.txt --timeout=600
-
-
-# Stage 2: Final image
 FROM python:3.9-slim
 
+# Set the working directory inside the container
 WORKDIR /app
 
-# Copy the installed dependencies from the build_stage
-COPY --from=build_stage /app /app
+# Copy the requirements files to the container
+COPY requirements-base.txt .
+COPY requirements.txt .
 
-# Expose port 5000
+# Upgrade pip and setuptools to avoid version issues
+RUN pip install --upgrade pip setuptools
+
+# Install system dependencies for image processing
+RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt-get install -y --no-install-recommends \
+    libopenblas-dev \
+    libomp-dev \
+    libglib2.0-0 \
+    libsm6 \
+    libxext6 \
+    libxrender-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install the base dependencies first
+RUN pip install --no-cache-dir -r requirements-base.txt
+
+# Install the remaining dependencies (heavier ones) from requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy the entire project into the container
+COPY . .
+
+# Expose the port your app will run on
 EXPOSE 5000
 
-# Run the app
+# Set the entrypoint (this runs your app when the container starts)
 CMD ["python", "app.py"]
