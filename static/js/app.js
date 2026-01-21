@@ -57,8 +57,10 @@ async function predictURL() {
     lastPrediction = {
         sourceType: "url",
         imageUrl: url,
-        imageFile: null,
-        prediction: data.prediction
+        prediction: data.prediction,
+        confidence: data.confidence,
+        sfw_confidence: data.sfw_confidence,
+        nsfw_confidence: data.nsfw_confidence
     };
 
     resBox.innerHTML = `
@@ -102,9 +104,10 @@ async function predictUpload() {
 
     lastPrediction = {
         sourceType: "upload",
-        imageUrl: null,
-        imageFile: fileInput.files[0],
-        prediction: data.prediction
+        prediction: data.prediction,
+        confidence: data.confidence,
+        sfw_confidence: data.sfw_confidence,
+        nsfw_confidence: data.nsfw_confidence
     };
 
     resBox.innerHTML = `
@@ -129,6 +132,10 @@ async function reportPrediction() {
     const formData = new FormData();
     formData.append("prediction", lastPrediction.prediction);
     formData.append("source_type", lastPrediction.sourceType);
+    formData.append("confidence", lastPrediction.confidence);
+    formData.append("sfw_confidence", lastPrediction.sfw_confidence);
+    formData.append("nsfw_confidence", lastPrediction.nsfw_confidence);
+
 
     if (lastPrediction.sourceType === "url") {
         formData.append("image_url", lastPrediction.imageUrl);
