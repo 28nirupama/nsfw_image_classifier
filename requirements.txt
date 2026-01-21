@@ -1,5 +1,5 @@
-Flask==2.1.1
-torch==1.12.1
-torchvision==0.13.1
-Pillow==9.0.1
-requests==2.27.1
+flask
+torch
+torchvision
+pillow
+requests

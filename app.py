@@ -5,12 +5,43 @@ from io import BytesIO
 import requests
 import os
 import datetime
+import time
+import logging
+import json
+from functools import wraps
+
 
 app = Flask(__name__)
 
 # Folder to store reported images
 REPORT_DIR = "reported_images"
 os.makedirs(REPORT_DIR, exist_ok=True)
+
+LOG_DIR = "logs"
+os.makedirs(LOG_DIR, exist_ok=True)
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s | %(levelname)s | %(message)s",
+    handlers=[
+        logging.FileHandler("logs/access.log"),
+        logging.FileHandler("logs/errors.log"),
+        logging.StreamHandler()
+    ]
+)
+def measure_time(route_name):
+    def decorator(f):
+        @wraps(f)
+        def wrapper(*args, **kwargs):
+            start = time.time()
+            try:
+                return f(*args, **kwargs)
+            finally:
+                duration = (time.time() - start) * 1000
+                logging.info(f"{route_name} | {duration:.2f} ms")
+        return wrapper
+    return decorator
+
 
 @app.route('/')
 def home():
@@ -21,6 +52,7 @@ def home():
 # Predict from URL
 # -----------------------
 @app.route('/predict', methods=['POST'])
+@measure_time("PREDICT_URL")
 def predict():
     data = request.get_json()
     image_url = data.get("image_url")
@@ -36,6 +68,7 @@ def predict():
 # Predict from Upload
 # -----------------------
 @app.route('/predict-upload', methods=['POST'])
+@measure_time("PREDICT_UPLOAD")
 def predict_upload():
     if 'file' not in request.files:
         return jsonify({"error": "No file uploaded"})
@@ -58,7 +91,9 @@ def predict_upload():
 # Report Incorrect Prediction
 # -----------------------
 @app.route('/report', methods=['POST'])
+@measure_time("REPORT_IMAGE")
 def report():
+
     predicted_label = request.form.get("prediction")
     source_type = request.form.get("source_type")
 
@@ -85,6 +120,8 @@ def report():
     image.save(os.path.join(save_dir, filename))
 
     return jsonify({"message": "Image reported successfully"})
+
+
 
 
 if __name__ == "__main__":
