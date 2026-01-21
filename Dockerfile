@@ -1,38 +1,20 @@
-# Use the official Python image from Docker Hub
+# Use an official Python runtime as a parent image
 FROM python:3.9-slim
 
-# Set a working directory inside the container
+# Set the working directory in the container
 WORKDIR /app
 
-# Copy the requirements files into the container
-COPY requirements-base.txt .
-COPY requirements.txt .
+# Copy the current directory contents into the container at /app
+COPY . /app
 
-# Upgrade pip and setuptools to avoid version issues
-RUN pip install --upgrade pip setuptools
-
-# Install system dependencies in batches to avoid memory issues
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    libopenblas-dev \
-    libomp-dev \
-    libglib2.0-0 \
-    libsm6 && rm -rf /var/lib/apt/lists/*
-
-RUN apt-get install -y --no-install-recommends \
-    libxext6 \
-    libxrender-dev && rm -rf /var/lib/apt/lists/*
-
-# Install the base dependencies first
-RUN pip install --no-cache-dir -r requirements-base.txt
-
-# Install the remaining dependencies (heavier ones) from requirements.txt
+# Install any needed packages specified in requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the entire project into the container
-COPY . .
-
-# Expose the port your app will run on
+# Expose the port the app runs on
 EXPOSE 5000
 
-# Set the entrypoint (this runs your app when the container starts)
-CMD ["python", "app.py"]
+# Define environment variable
+ENV FLASK_APP=app.py
+
+# Run the application
+CMD ["flask", "run", "--host=0.0.0.0", "--port=5000"]
