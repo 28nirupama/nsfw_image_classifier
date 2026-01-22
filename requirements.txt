@@ -1,5 +1,5 @@
-flask
-torch
-torchvision
-pillow
-requests
+flask==3.1.2
+torch==2.10.0
+torchvision==0.11.3
+pillow==8.4.0
+requests==2.26.0
