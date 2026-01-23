@@ -36,3 +36,21 @@
 2026-01-22 09:52:00,829 | INFO | 127.0.0.1 - - [22/Jan/2026 09:52:00] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
 2026-01-22 09:52:00,856 | INFO | 127.0.0.1 - - [22/Jan/2026 09:52:00] "[36mGET /static/js/app.js HTTP/1.1[0m" 304 -
 2026-01-22 09:52:00,890 | INFO | 127.0.0.1 - - [22/Jan/2026 09:52:00] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2026-01-23 22:34:54,467 | INFO | [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.43.224:5000
+2026-01-23 22:34:54,470 | INFO | [33mPress CTRL+C to quit[0m
+2026-01-23 22:34:54,507 | INFO |  * Restarting with watchdog (windowsapi)
+2026-01-23 22:35:00,622 | WARNING |  * Debugger is active!
+2026-01-23 22:35:00,627 | INFO |  * Debugger PIN: 140-479-292
+2026-01-23 22:35:00,730 | INFO | 192.168.43.224 - - [23/Jan/2026 22:35:00] "GET / HTTP/1.1" 200 -
+2026-01-23 22:35:00,854 | INFO | 192.168.43.224 - - [23/Jan/2026 22:35:00] "GET /static/css/style.css HTTP/1.1" 200 -
+2026-01-23 22:35:00,884 | INFO | 192.168.43.224 - - [23/Jan/2026 22:35:00] "GET /static/js/app.js HTTP/1.1" 200 -
+2026-01-23 22:35:00,923 | INFO | 192.168.43.224 - - [23/Jan/2026 22:35:00] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2026-01-23 22:35:10,946 | INFO | PREDICT_UPLOAD | 523.49 ms
+2026-01-23 22:35:10,947 | INFO | 192.168.43.224 - - [23/Jan/2026 22:35:10] "POST /predict-upload HTTP/1.1" 200 -
+2026-01-23 22:35:20,095 | INFO | PREDICT_UPLOAD | 104.45 ms
+2026-01-23 22:35:20,096 | INFO | 192.168.43.224 - - [23/Jan/2026 22:35:20] "POST /predict-upload HTTP/1.1" 200 -
+2026-01-23 22:35:24,944 | INFO | REPORT_IMAGE | 6.09 ms
+2026-01-23 22:35:24,945 | INFO | 192.168.43.224 - - [23/Jan/2026 22:35:24] "POST /report HTTP/1.1" 200 -
