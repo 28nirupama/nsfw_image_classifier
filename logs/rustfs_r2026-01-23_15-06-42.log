@@ -1,0 +1,12 @@
+[2026-01-23 20:36:42.825954 +05:30] ERROR [s3s::ops] [C:\Users\runneradmin\.cargo\git\checkouts\s3s-5cf49da3e5499213\df2434d\crates\s3s\src\ops\mod.rs:262] [rustfs-worker:ThreadId(7)] custom route returns error err=S3Error(Inner { code: AccessDenied, message: Some("Signature is required"), request_id: None, status_code: None, source: None, headers: None })
+
+[2026-01-23 20:36:46.082212 +05:30] ERROR [s3s::ops] [C:\Users\runneradmin\.cargo\git\checkouts\s3s-5cf49da3e5499213\df2434d\crates\s3s\src\ops\mod.rs:262] [rustfs-worker:ThreadId(16)] custom route returns error err=S3Error(Inner { code: AccessDenied, message: Some("Signature is required"), request_id: None, status_code: None, source: None, headers: None })
+
+[2026-01-23 20:36:49.811865 +05:30] ERROR [s3s::ops] [C:\Users\runneradmin\.cargo\git\checkouts\s3s-5cf49da3e5499213\df2434d\crates\s3s\src\ops\mod.rs:262] [rustfs-worker:ThreadId(10)] custom route returns error err=S3Error(Inner { code: AccessDenied, message: Some("Signature is required"), request_id: None, status_code: None, source: None, headers: None })
+
+[2026-01-23 20:39:11.458171 +05:30] ERROR [rustfs_ecstore::disk::local] [crates\ecstore\src\disk\local.rs:276] [rustfs-worker:ThreadId(3)] cleanup_deleted_objects error: Io(Os { code: 5, kind: PermissionDenied, message: "Access is denied." })
+
+[2026-01-23 20:40:23.954146 +05:30] ERROR [s3s::ops] [C:\Users\runneradmin\.cargo\git\checkouts\s3s-5cf49da3e5499213\df2434d\crates\s3s\src\ops\mod.rs:262] [rustfs-worker:ThreadId(7)] custom route returns error err=S3Error(Inner { code: AccessDenied, message: Some("Signature is required"), request_id: None, status_code: None, source: None, headers: None })
+
+[2026-01-23 20:40:24.862986 +05:30] ERROR [s3s::ops] [C:\Users\runneradmin\.cargo\git\checkouts\s3s-5cf49da3e5499213\df2434d\crates\s3s\src\ops\mod.rs:262] [rustfs-worker:ThreadId(10)] custom route returns error err=S3Error(Inner { code: AccessDenied, message: Some("Signature is required"), request_id: None, status_code: None, source: None, headers: None })
+
