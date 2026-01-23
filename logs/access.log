@@ -1,0 +1,38 @@
+2026-01-21 23:05:17,681 | INFO | [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.43.224:5000
+2026-01-21 23:05:17,682 | INFO | [33mPress CTRL+C to quit[0m
+2026-01-21 23:05:17,706 | INFO |  * Restarting with watchdog (windowsapi)
+2026-01-21 23:05:26,747 | WARNING |  * Debugger is active!
+2026-01-21 23:05:26,751 | INFO |  * Debugger PIN: 140-678-337
+2026-01-21 23:05:38,569 | INFO | 192.168.43.224 - - [21/Jan/2026 23:05:38] "GET / HTTP/1.1" 200 -
+2026-01-21 23:05:38,730 | INFO | 192.168.43.224 - - [21/Jan/2026 23:05:38] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-01-21 23:05:38,744 | INFO | 192.168.43.224 - - [21/Jan/2026 23:05:38] "GET /static/js/app.js HTTP/1.1" 200 -
+2026-01-21 23:05:38,849 | INFO | 192.168.43.224 - - [21/Jan/2026 23:05:38] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2026-01-21 23:05:46,594 | INFO | PREDICT_UPLOAD | 214.48 ms
+2026-01-21 23:05:46,595 | INFO | 192.168.43.224 - - [21/Jan/2026 23:05:46] "POST /predict-upload HTTP/1.1" 200 -
+2026-01-21 23:05:55,887 | INFO | PREDICT_UPLOAD | 208.39 ms
+2026-01-21 23:05:55,888 | INFO | 192.168.43.224 - - [21/Jan/2026 23:05:55] "POST /predict-upload HTTP/1.1" 200 -
+2026-01-21 23:06:09,185 | INFO | PREDICT_UPLOAD | 206.13 ms
+2026-01-21 23:06:09,185 | INFO | 192.168.43.224 - - [21/Jan/2026 23:06:09] "POST /predict-upload HTTP/1.1" 200 -
+2026-01-21 23:06:18,404 | INFO | PREDICT_UPLOAD | 187.66 ms
+2026-01-21 23:06:18,405 | INFO | 192.168.43.224 - - [21/Jan/2026 23:06:18] "POST /predict-upload HTTP/1.1" 200 -
+2026-01-21 23:06:57,789 | INFO | PREDICT_UPLOAD | 174.20 ms
+2026-01-21 23:06:57,790 | INFO | 192.168.43.224 - - [21/Jan/2026 23:06:57] "POST /predict-upload HTTP/1.1" 200 -
+2026-01-21 23:07:11,795 | INFO | PREDICT_UPLOAD | 269.01 ms
+2026-01-21 23:07:11,796 | INFO | 192.168.43.224 - - [21/Jan/2026 23:07:11] "POST /predict-upload HTTP/1.1" 200 -
+2026-01-21 23:07:35,800 | INFO | PREDICT_UPLOAD | 215.25 ms
+2026-01-21 23:07:35,801 | INFO | 192.168.43.224 - - [21/Jan/2026 23:07:35] "POST /predict-upload HTTP/1.1" 200 -
+2026-01-22 09:40:44,233 | INFO | [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://127.0.0.1:5000
+2026-01-22 09:40:44,235 | INFO | [33mPress CTRL+C to quit[0m
+2026-01-22 09:40:44,285 | INFO |  * Restarting with watchdog (windowsapi)
+2026-01-22 09:40:51,003 | WARNING |  * Debugger is active!
+2026-01-22 09:40:51,012 | INFO |  * Debugger PIN: 140-678-337
+2026-01-22 09:52:00,629 | INFO | 127.0.0.1 - - [22/Jan/2026 09:52:00] "GET / HTTP/1.1" 200 -
+2026-01-22 09:52:00,829 | INFO | 127.0.0.1 - - [22/Jan/2026 09:52:00] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-01-22 09:52:00,856 | INFO | 127.0.0.1 - - [22/Jan/2026 09:52:00] "[36mGET /static/js/app.js HTTP/1.1[0m" 304 -
+2026-01-22 09:52:00,890 | INFO | 127.0.0.1 - - [22/Jan/2026 09:52:00] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
