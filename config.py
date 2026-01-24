@@ -33,6 +33,9 @@ class Config:
     S3_BUCKET_SFW_REPORTED = os.getenv('S3_BUCKET_SFW_REPORTED', 'sfwreported')
     S3_BUCKET_SAFE_REPORTED = os.getenv('S3_BUCKET_SAFE_REPORTED', 'safereported')
 
+    # S3 Upload Control - set to 'false' to disable S3 uploads
+    S3_UPLOAD_ENABLED = os.getenv('S3_UPLOAD_ENABLED', 'true').lower() == 'true'
+
     # External API
     PREDICTION_API_URL = os.getenv('PREDICTION_API_URL', 'https://nsfw-detection.todos.monster/predict')
 
