@@ -5,6 +5,7 @@ from torchvision import transforms
 from PIL import Image
 from io import BytesIO
 import requests
+from config import config
 
 # Device
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -14,7 +15,7 @@ model = resnet50(weights=None)
 model.fc = nn.Linear(model.fc.in_features, 2)
 
 model.load_state_dict(
-    torch.load("resnet50_nsfw_finetuned.pt", map_location=device)
+    torch.load(config.MODEL_PATH, map_location=device)
 )
 model.to(device)
 model.eval()
