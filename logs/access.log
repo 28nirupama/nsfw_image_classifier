@@ -54,3 +54,25 @@
 2026-01-23 22:35:20,096 | INFO | 192.168.43.224 - - [23/Jan/2026 22:35:20] "POST /predict-upload HTTP/1.1" 200 -
 2026-01-23 22:35:24,944 | INFO | REPORT_IMAGE | 6.09 ms
 2026-01-23 22:35:24,945 | INFO | 192.168.43.224 - - [23/Jan/2026 22:35:24] "POST /report HTTP/1.1" 200 -
+2026-01-24 09:05:52,503 | INFO | [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.43.224:5000
+2026-01-24 09:05:52,505 | INFO | [33mPress CTRL+C to quit[0m
+2026-01-24 09:05:52,534 | INFO |  * Restarting with watchdog (windowsapi)
+2026-01-24 09:05:57,490 | WARNING |  * Debugger is active!
+2026-01-24 09:05:57,495 | INFO |  * Debugger PIN: 140-479-292
+2026-01-24 09:05:59,653 | INFO | 192.168.43.224 - - [24/Jan/2026 09:05:59] "GET / HTTP/1.1" 200 -
+2026-01-24 09:05:59,749 | INFO | 192.168.43.224 - - [24/Jan/2026 09:05:59] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-01-24 09:05:59,813 | INFO | 192.168.43.224 - - [24/Jan/2026 09:05:59] "[36mGET /static/js/app.js HTTP/1.1[0m" 304 -
+2026-01-24 09:05:59,839 | INFO | 192.168.43.224 - - [24/Jan/2026 09:05:59] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2026-01-24 09:06:10,709 | INFO | PREDICT_UPLOAD | 426.28 ms
+2026-01-24 09:06:10,710 | INFO | 192.168.43.224 - - [24/Jan/2026 09:06:10] "POST /predict-upload HTTP/1.1" 200 -
+2026-01-24 09:06:13,037 | INFO | REPORT_IMAGE | 1.75 ms
+2026-01-24 09:06:13,038 | INFO | 192.168.43.224 - - [24/Jan/2026 09:06:13] "POST /report HTTP/1.1" 200 -
+2026-01-24 09:06:17,390 | INFO | PREDICT_UPLOAD | 137.24 ms
+2026-01-24 09:06:17,390 | INFO | 192.168.43.224 - - [24/Jan/2026 09:06:17] "POST /predict-upload HTTP/1.1" 200 -
+2026-01-24 09:06:30,336 | INFO | PREDICT_UPLOAD | 206.99 ms
+2026-01-24 09:06:30,337 | INFO | 192.168.43.224 - - [24/Jan/2026 09:06:30] "POST /predict-upload HTTP/1.1" 200 -
+2026-01-24 09:06:33,442 | INFO | REPORT_IMAGE | 1.75 ms
+2026-01-24 09:06:33,443 | INFO | 192.168.43.224 - - [24/Jan/2026 09:06:33] "POST /report HTTP/1.1" 200 -
