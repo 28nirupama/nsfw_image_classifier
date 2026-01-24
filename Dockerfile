@@ -18,6 +18,5 @@ COPY . .
 # Expose the port Flask will run on
 EXPOSE 5000
 
-# Set the default command to run the app using Flask (for debugging)
-CMD ["flask", "run", "--host=0.0.0.0", "--port=5000"]
-
+# Set the default command to run the app using Gunicorn in production mode
+CMD ["gunicorn", "--bind", "0.0.0.0:5000", "--workers", "4", "--access-logfile", "-", "app:app"]
