@@ -7,9 +7,8 @@ import os
 import datetime
 import time
 import logging
-import json
 from functools import wraps
-from rustfs_test import upload_reported_image
+from rustfs_test import upload_reported_image  # Upload helper for AWS S3
 
 app = Flask(__name__)
 
@@ -77,14 +76,13 @@ def predict_url():
         buffer = BytesIO()
         image.save(buffer, format="JPEG")
         buffer.seek(0)
+        upload_reported_image(buffer, filename, 'allimages')  # Always store in allimages
 
-        # Only store the image in the correct bucket based on prediction (NSFW/SFW)
+        # Store the image in the appropriate S3 bucket based on prediction
         if external_prediction['prediction'] == 'NSFW':
             upload_reported_image(buffer, filename, 'nsfwreported')
         elif external_prediction['prediction'] == 'SFW':
             upload_reported_image(buffer, filename, 'sfwreported')
-        else:
-            upload_reported_image(buffer, filename, 'safereported')
 
         # Return success message for frontend (for external API)
         return jsonify({"message": "nsfw-detection.todos.monster says: Image reported successfully!"})
@@ -109,17 +107,89 @@ def predict_upload():
 
     result = predict_pil_image(image)
 
-    # Return the prediction result without storing the image
-    return jsonify({
-        "prediction": result["prediction"],
-        "sfw_confidence": result["sfw_confidence"],
-        "nsfw_confidence": result["nsfw_confidence"]
-    })
+    # Save image temporarily for reporting
+    buffer = BytesIO()
+    image.save(buffer, format="JPEG")
+    buffer.seek(0)  # Ensure buffer is at the start
+
+    try:
+        # Generate filename with timestamp
+        filename = f"{result['prediction']}_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}.jpg"
+
+        # Upload to allimages bucket
+        upload_reported_image(buffer, filename, 'allimages')
+
+        # Upload to the appropriate bucket based on prediction
+        if result["prediction"] == "NSFW":
+            upload_reported_image(buffer, filename, 'nsfwreported')
+        else:
+            upload_reported_image(buffer, filename, 'sfwreported')
+
+        # Return success message for frontend
+        return jsonify({"message": "localhost:5000 says: Image reported successfully!"})
+
+    except Exception as e:
+        return jsonify({"error": f"Failed to upload image: {str(e)}"}), 500
 
 
 # -----------------------
 # Report Incorrect Prediction
 # -----------------------
+@app.route('/report', methods=['POST'])
+@measure_time("REPORT_IMAGE")
+def report():
+    predicted_label = request.form.get("prediction")
+    source_type = request.form.get("source_type")
+    report_type = request.form.get("report_type")  # "nsfw", "sfw", or "safe"
+
+    if not predicted_label or not source_type or not report_type:
+        return jsonify({"error": "Invalid report data"})
+
+    # Determine the bucket based on report_type
+    if report_type == "nsfw":
+        bucket = 'nsfwreported'
+    elif report_type == "sfw":
+        bucket = 'sfwreported'
+    elif report_type == "safe":
+        bucket = 'safereported'  # New bucket for safe images
+    else:
+        return jsonify({"error": "Unknown report type"}), 400
+
+    # Get the image based on source_type (URL or upload)
+    image = None
+    image_bytes = None
+
+    if source_type == "url":
+        image_url = request.form.get("image_url")
+        try:
+            response = requests.get(image_url, timeout=10)
+            response.raise_for_status()  # Raise an exception for bad HTTP responses
+            image = Image.open(BytesIO(response.content)).convert("RGB")
+        except requests.exceptions.RequestException as e:
+            return jsonify({"error": f"Failed to fetch image from URL: {str(e)}"}), 400
+    elif source_type == "upload":
+        image_bytes = app.config.get("LAST_UPLOADED_IMAGE")
+        image = Image.open(BytesIO(image_bytes)).convert("RGB")
+    else:
+        return jsonify({"error": "Unknown source type"})
+
+    # Prepare filename
+    timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+    filename = f"{predicted_label}_{timestamp}.jpg"
+
+    # Save image to memory buffer
+    buffer = BytesIO()
+    image.save(buffer, format="JPEG")
+    buffer.seek(0)
+
+    # Upload to cloud (S3-compatible bucket)
+    try:
+        upload_reported_image(buffer, filename, bucket)  # Upload to correct bucket
+        return jsonify({"message": "Image reported and uploaded successfully"})
+    except Exception as e:
+        return jsonify({"error": f"Failed to upload image: {str(e)}"}), 500
+
+
 def get_prediction_from_external_api(image_url):
     prediction_api_url = "https://nsfw-detection.todos.monster/predict"
     response = requests.post(prediction_api_url, json={"image_url": image_url})
