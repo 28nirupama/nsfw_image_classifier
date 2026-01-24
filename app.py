@@ -29,6 +29,7 @@ logging.basicConfig(
         logging.StreamHandler()
     ]
 )
+
 def measure_time(route_name):
     def decorator(f):
         @wraps(f)
@@ -49,67 +50,11 @@ def home():
 
 
 # -----------------------
-# Predict from URL
+# Predict from URL (External API)
 # -----------------------
-@app.route('/predict', methods=['POST'])
+@app.route('/predict-url', methods=['POST'])
 @measure_time("PREDICT_URL")
-def predict():
-    data = request.get_json()
-    image_url = data.get("image_url")
-
-    if not image_url:
-        return jsonify({"error": "No image URL provided"})
-
-    result = predict_from_url(image_url)
-    return jsonify(result)
-
-
-# -----------------------
-# Predict from Upload
-# -----------------------
-@app.route('/predict-upload', methods=['POST'])
-@measure_time("PREDICT_UPLOAD")
-def predict_upload():
-    if 'file' not in request.files:
-        return jsonify({"error": "No file uploaded"})
-
-    file = request.files['file']
-    image = Image.open(file).convert("RGB")
-
-    result = predict_pil_image(image)
-
-    # Save image temporarily for reporting
-    buffer = BytesIO()
-    image.save(buffer, format="JPEG")
-    buffer.seek(0)  # Ensure buffer is at the start
-
-    try:
-        # Generate filename with timestamp
-        filename = f"{result['prediction']}_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}.jpg"
-        
-        # Upload to allimages bucket
-        upload_reported_image(buffer, filename, 'allimages')
-
-        # Upload to the appropriate bucket based on prediction
-        if result["prediction"] == "NSFW":
-            upload_reported_image(buffer, filename, 'nsfwreported')
-        else:
-            upload_reported_image(buffer, filename, 'sfwreported')
-
-        # Return success message for frontend (for localhost)
-        return jsonify({"message": "localhost:5000 says: Image reported successfully!"})
-
-    except Exception as e:
-        return jsonify({"error": f"Failed to upload image: {str(e)}"}), 500
-
-
-# -----------------------
-# Report Incorrect Prediction
-# -----------------------
-# In app.py, inside the /report route
-@app.route('/predict', methods=['POST'])
-@measure_time("PREDICT_URL")
-def predict():
+def predict_url():
     data = request.get_json()
     image_url = data.get("image_url")
 
@@ -150,6 +95,49 @@ def predict():
     except Exception as e:
         return jsonify({"error": f"Error during prediction: {str(e)}"}), 500
 
+
+# -----------------------
+# Predict from Upload (Local)
+# -----------------------
+@app.route('/predict-upload', methods=['POST'])
+@measure_time("PREDICT_UPLOAD")
+def predict_upload():
+    if 'file' not in request.files:
+        return jsonify({"error": "No file uploaded"})
+
+    file = request.files['file']
+    image = Image.open(file).convert("RGB")
+
+    result = predict_pil_image(image)
+
+    # Save image temporarily for reporting
+    buffer = BytesIO()
+    image.save(buffer, format="JPEG")
+    buffer.seek(0)  # Ensure buffer is at the start
+
+    try:
+        # Generate filename with timestamp
+        filename = f"{result['prediction']}_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}.jpg"
+        
+        # Upload to allimages bucket
+        upload_reported_image(buffer, filename, 'allimages')
+
+        # Upload to the appropriate bucket based on prediction
+        if result["prediction"] == "NSFW":
+            upload_reported_image(buffer, filename, 'nsfwreported')
+        else:
+            upload_reported_image(buffer, filename, 'sfwreported')
+
+        # Return success message for frontend (for localhost)
+        return jsonify({"message": "localhost:5000 says: Image reported successfully!"})
+
+    except Exception as e:
+        return jsonify({"error": f"Failed to upload image: {str(e)}"}), 500
+
+
+# -----------------------
+# Report Incorrect Prediction
+# -----------------------
 def get_prediction_from_external_api(image_url):
     prediction_api_url = "https://nsfw-detection.todos.monster/predict"
     response = requests.post(prediction_api_url, json={"image_url": image_url})
@@ -167,4 +155,3 @@ def get_prediction_from_external_api(image_url):
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)
-
