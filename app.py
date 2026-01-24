@@ -46,10 +46,6 @@ def measure_time(route_name):
         return wrapper
     return decorator
 
-<<<<<<< HEAD
-=======
-
->>>>>>> e1b4716e0b296b4a07909a7f553824c3bdd0c7e1
 @app.route('/')
 def home():
     return render_template("index.html")
@@ -114,12 +110,6 @@ def predict_upload():
     try:
         # Process the uploaded image file
         image = Image.open(file).convert("RGB")
-
-<<<<<<< HEAD
-        # Get prediction using the local model
-=======
-        # Get prediction using local model
->>>>>>> e1b4716e0b296b4a07909a7f553824c3bdd0c7e1
         prediction_result = predict_pil_image(image, threshold=config.NSFW_THRESHOLD)
 
         # Define filename
@@ -143,11 +133,7 @@ def predict_upload():
             "confidence": prediction_result['confidence'],
             "sfw_confidence": prediction_result['sfw_confidence'],
             "nsfw_confidence": prediction_result['nsfw_confidence'],
-<<<<<<< HEAD
-            "message": "Image uploaded and classified successfully!"
-=======
             "message": "Image classified successfully!"
->>>>>>> e1b4716e0b296b4a07909a7f553824c3bdd0c7e1
         })
 
     except Exception as e:
