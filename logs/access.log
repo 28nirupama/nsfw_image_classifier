@@ -99,3 +99,17 @@
 2026-01-24 23:03:09,329 | INFO | 192.168.43.224 - - [24/Jan/2026 23:03:09] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
 2026-01-24 23:03:09,346 | INFO | 192.168.43.224 - - [24/Jan/2026 23:03:09] "[36mGET /static/js/app.js HTTP/1.1[0m" 304 -
 2026-01-24 23:03:17,248 | INFO | 192.168.43.224 - - [24/Jan/2026 23:03:17] "[33mPOST /predict-upload HTTP/1.1[0m" 404 -
+2026-01-24 23:54:24,533 | INFO | [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.43.224:5000
+2026-01-24 23:54:24,534 | INFO | [33mPress CTRL+C to quit[0m
+2026-01-24 23:54:24,583 | INFO |  * Restarting with watchdog (windowsapi)
+2026-01-24 23:54:31,927 | WARNING |  * Debugger is active!
+2026-01-24 23:54:31,935 | INFO |  * Debugger PIN: 140-479-292
+2026-01-24 23:54:39,397 | INFO | 192.168.43.224 - - [24/Jan/2026 23:54:39] "GET / HTTP/1.1" 200 -
+2026-01-24 23:54:39,510 | INFO | 192.168.43.224 - - [24/Jan/2026 23:54:39] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-01-24 23:54:39,513 | INFO | 192.168.43.224 - - [24/Jan/2026 23:54:39] "GET /static/js/app.js HTTP/1.1" 200 -
+2026-01-24 23:54:47,333 | ERROR | Error during prediction: name 'get_prediction_from_external_api' is not defined
+2026-01-24 23:54:47,334 | INFO | PREDICT_UPLOAD | 128.96 ms
+2026-01-24 23:54:47,334 | INFO | 192.168.43.224 - - [24/Jan/2026 23:54:47] "[35m[1mPOST /predict-upload HTTP/1.1[0m" 500 -

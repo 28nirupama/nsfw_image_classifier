@@ -46,9 +46,31 @@ def measure_time(route_name):
         return wrapper
     return decorator
 
+def get_prediction_from_external_api(image_url):
+    try:
+        response = requests.post(config.PREDICTION_API_URL, json={"image_url": image_url})
+        response.raise_for_status()  # Raise an exception for HTTP errors
+        result = response.json()
+        return {
+            "prediction": result.get("prediction"),
+            "sfw_confidence": result.get("sfw_confidence"),
+            "nsfw_confidence": result.get("nsfw_confidence"),
+        }
+    except requests.exceptions.HTTPError as http_err:
+        logging.error(f"HTTP error occurred: {http_err}")
+        raise
+    except requests.exceptions.RequestException as req_err:
+        logging.error(f"Request error occurred: {req_err}")
+        raise
+    except ValueError as json_err:
+        logging.error(f"Error decoding JSON response: {json_err}")
+        raise
+
+
 @app.route('/')
 def home():
     return render_template("index.html")
+
 
 @app.route('/predict-url', methods=['POST'])
 @measure_time("PREDICT_URL")
@@ -99,6 +121,7 @@ def predict_url():
         logging.error(f"Error during prediction: {str(e)}")
         return jsonify({"error": f"Error during prediction: {str(e)}"}), 500
 
+
 @app.route('/predict-upload', methods=['POST'])
 @measure_time("PREDICT_UPLOAD")
 def predict_upload():
@@ -111,18 +134,19 @@ def predict_upload():
         # Process the uploaded image file
         image = Image.open(file).convert("RGB")
 
-        # Get prediction from the external API
-        external_prediction = get_prediction_from_external_api(file.filename)
-
-        # Define filename
-        filename = f"{external_prediction['prediction']}_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}.jpg"
-
-        # Upload the image to the `allimages` bucket
+        # Save image to S3 and get the image URL for prediction
+        filename = f"{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}.jpg"
         buffer = BytesIO()
         image.thumbnail((1024, 1024))  # Resize image before saving
         image.save(buffer, format="JPEG")
         buffer.seek(0)  # Ensure the buffer is at the start
         upload_reported_image(buffer, filename, config.S3_BUCKET_ALL_IMAGES)  # Always store in allimages
+
+        # Generate the image URL (assuming your S3 bucket is publicly accessible)
+        image_url = f"https://{config.AWS_ENDPOINT_URL}/{config.S3_BUCKET_ALL_IMAGES}/{filename}"
+
+        # Get prediction from the external API using the image URL
+        external_prediction = get_prediction_from_external_api(image_url)
 
         # Store the image in the appropriate S3 bucket based on prediction
         if external_prediction['prediction'] == 'NSFW':
@@ -130,12 +154,17 @@ def predict_upload():
         elif external_prediction['prediction'] == 'SFW':
             upload_reported_image(buffer, filename, config.S3_BUCKET_SFW_REPORTED)
 
-        # Return success message for frontend
-        return jsonify({"message": "Image uploaded and reported successfully!"})
+        return jsonify({
+            "prediction": external_prediction['prediction'],
+            "sfw_confidence": external_prediction['sfw_confidence'],
+            "nsfw_confidence": external_prediction['nsfw_confidence'],
+            "message": "Image uploaded and reported successfully!"
+        })
 
     except Exception as e:
         logging.error(f"Error during prediction: {str(e)}")
         return jsonify({"error": f"Error during prediction: {str(e)}"}), 500
+
 
 @app.route('/report-prediction', methods=['POST'])
 def report_prediction():
