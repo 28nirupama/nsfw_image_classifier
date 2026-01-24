@@ -144,3 +144,17 @@
 2026-01-25 00:05:54,727 | ERROR | Error during prediction: 404 Client Error: Not Found for url: https://nsfw-detection.todos.monster/predict
 2026-01-25 00:05:54,727 | INFO | PREDICT_UPLOAD | 4542.55 ms
 2026-01-25 00:05:54,728 | INFO | 127.0.0.1 - - [25/Jan/2026 00:05:54] "[35m[1mPOST /predict-upload HTTP/1.1[0m" 500 -
+2026-01-25 00:28:01,555 | INFO | [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.43.224:5000
+2026-01-25 00:28:01,556 | INFO | [33mPress CTRL+C to quit[0m
+2026-01-25 00:28:01,582 | INFO |  * Restarting with watchdog (windowsapi)
+2026-01-25 00:28:11,215 | WARNING |  * Debugger is active!
+2026-01-25 00:28:11,224 | INFO |  * Debugger PIN: 140-479-292
+2026-01-25 00:28:18,627 | INFO | 127.0.0.1 - - [25/Jan/2026 00:28:18] "GET / HTTP/1.1" 200 -
+2026-01-25 00:28:18,735 | INFO | 127.0.0.1 - - [25/Jan/2026 00:28:18] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-01-25 00:28:18,742 | INFO | 127.0.0.1 - - [25/Jan/2026 00:28:18] "[36mGET /static/js/app.js HTTP/1.1[0m" 304 -
+2026-01-25 00:28:29,607 | ERROR | Error during prediction: 'Config' object has no attribute 'S3_UPLOAD_ENABLED'
+2026-01-25 00:28:29,608 | INFO | PREDICT_UPLOAD | 345.41 ms
+2026-01-25 00:28:29,609 | INFO | 127.0.0.1 - - [25/Jan/2026 00:28:29] "[35m[1mPOST /predict-upload HTTP/1.1[0m" 500 -

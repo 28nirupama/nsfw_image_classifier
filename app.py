@@ -71,18 +71,19 @@ def predict_url():
         # Define filename
         filename = f"{prediction_result['prediction']}_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}.jpg"
 
-        # Upload the image to the `allimages` bucket
-        buffer = BytesIO()
-        image.thumbnail((1024, 1024))  # Resize image before saving
-        image.save(buffer, format="JPEG")
-        buffer.seek(0)  # Ensure the buffer is at the start
-        upload_reported_image(buffer, filename, config.S3_BUCKET_ALL_IMAGES)  # Always store in allimages
+        # Upload the image to the `allimages` bucket if S3_UPLOAD_ENABLED is True
+        if config.S3_UPLOAD_ENABLED:
+            buffer = BytesIO()
+            image.thumbnail((1024, 1024))  # Resize image before saving
+            image.save(buffer, format="JPEG")
+            buffer.seek(0)  # Ensure the buffer is at the start
+            upload_reported_image(buffer, filename, config.S3_BUCKET_ALL_IMAGES)  # Always store in allimages
 
-        # Store the image in the appropriate S3 bucket based on prediction
-        if prediction_result['prediction'] == 'NSFW':
-            upload_reported_image(buffer, filename, config.S3_BUCKET_NSFW_REPORTED)
-        elif prediction_result['prediction'] == 'SFW':
-            upload_reported_image(buffer, filename, config.S3_BUCKET_SFW_REPORTED)
+            # Store the image in the appropriate S3 bucket based on prediction
+            if prediction_result['prediction'] == 'NSFW':
+                upload_reported_image(buffer, filename, config.S3_BUCKET_NSFW_REPORTED)
+            elif prediction_result['prediction'] == 'SFW':
+                upload_reported_image(buffer, filename, config.S3_BUCKET_SFW_REPORTED)
 
         return jsonify({
             "prediction": prediction_result['prediction'],
@@ -115,25 +116,26 @@ def predict_upload():
         # Define filename
         filename = f"{prediction_result['prediction']}_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}.jpg"
 
-        # Upload the image to the `allimages` bucket
-        buffer = BytesIO()
-        image.thumbnail((1024, 1024))  # Resize image before saving
-        image.save(buffer, format="JPEG")
-        buffer.seek(0)  # Ensure the buffer is at the start
-        upload_reported_image(buffer, filename, config.S3_BUCKET_ALL_IMAGES)  # Always store in allimages
+        # Upload the image to the `allimages` bucket if S3_UPLOAD_ENABLED is True
+        if config.S3_UPLOAD_ENABLED:
+            buffer = BytesIO()
+            image.thumbnail((1024, 1024))  # Resize image before saving
+            image.save(buffer, format="JPEG")
+            buffer.seek(0)  # Ensure the buffer is at the start
+            upload_reported_image(buffer, filename, config.S3_BUCKET_ALL_IMAGES)  # Always store in allimages
 
-        # Store the image in the appropriate S3 bucket based on prediction
-        if prediction_result['prediction'] == 'NSFW':
-            upload_reported_image(buffer, filename, config.S3_BUCKET_NSFW_REPORTED)
-        elif prediction_result['prediction'] == 'SFW':
-            upload_reported_image(buffer, filename, config.S3_BUCKET_SFW_REPORTED)
+            # Store the image in the appropriate S3 bucket based on prediction
+            if prediction_result['prediction'] == 'NSFW':
+                upload_reported_image(buffer, filename, config.S3_BUCKET_NSFW_REPORTED)
+            elif prediction_result['prediction'] == 'SFW':
+                upload_reported_image(buffer, filename, config.S3_BUCKET_SFW_REPORTED)
 
         return jsonify({
             "prediction": prediction_result['prediction'],
             "confidence": prediction_result['confidence'],
             "sfw_confidence": prediction_result['sfw_confidence'],
             "nsfw_confidence": prediction_result['nsfw_confidence'],
-            "message": "Image classified successfully!"
+            "message": "Image uploaded and classified successfully!"
         })
 
     except Exception as e:
