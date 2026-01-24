@@ -26,7 +26,6 @@ document.getElementById("imageUrl").addEventListener("input", () => {
     document.getElementById("reportBtn").style.display = "none";
 });
 
-
 // ----------------------
 // Predict from URL (External API)
 // ----------------------
@@ -41,7 +40,7 @@ async function predictURL() {
 
     resBox.innerHTML = "Analyzing image...";
 
-    const res = await fetch(`${BASE_URL}/predict-url`, {  // Changed to /predict-url
+    const res = await fetch(`${BASE_URL}/predict-url`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ image_url: url })
@@ -72,7 +71,6 @@ async function predictURL() {
     document.getElementById("reportBtn").style.display = "block";
 }
 
-
 // ----------------------
 // Predict from Upload (Local)
 // ----------------------
@@ -90,7 +88,7 @@ async function predictUpload() {
     const formData = new FormData();
     formData.append("file", fileInput.files[0]);
 
-    const res = await fetch(`${BASE_URL}/predict-upload`, {  // This remains unchanged (local uploads)
+    const res = await fetch(`${BASE_URL}/predict-upload`, {
         method: "POST",
         body: formData
     });
@@ -119,7 +117,6 @@ async function predictUpload() {
     document.getElementById("reportBtn").style.display = "block";
 }
 
-
 // ----------------------
 // Report Incorrect Prediction
 // ----------------------
@@ -140,7 +137,7 @@ async function reportPrediction() {
         formData.append("image_url", lastPrediction.imageUrl);
     }
 
-    const res = await fetch(`${BASE_URL}/predict-upload`, {  // This should still call the same endpoint for reporting
+    const res = await fetch(`${BASE_URL}/report-prediction`, {
         method: "POST",
         body: formData
     });
@@ -149,7 +146,7 @@ async function reportPrediction() {
 
     // Show the success message based on where the prediction came from
     if (data.message) {
-        alert(`${data.message}`); // Display either message from localhost or external API
+        alert(`${data.message}`);
     } else if (data.error) {
         alert(`Error: ${data.error}`);
     }
