@@ -2,30 +2,51 @@ import boto3
 from botocore.client import Config as BotoConfig
 from config import config
 
-# Validate AWS credentials are set
-config.validate()
+# Lazy initialization of S3 client
+_s3_client = None
 
-# Set up S3 client using environment variables
-s3 = boto3.client(
-    's3',
-    endpoint_url=config.AWS_ENDPOINT_URL,
-    aws_access_key_id=config.AWS_ACCESS_KEY_ID,
-    aws_secret_access_key=config.AWS_SECRET_ACCESS_KEY,
-    config=BotoConfig(signature_version='s3v4'),
-    region_name=config.AWS_REGION
-)
+
+def _get_s3_client():
+    """Get or create S3 client. Returns None if S3 is disabled or not configured."""
+    global _s3_client
+
+    if not config.S3_UPLOAD_ENABLED:
+        return None
+
+    if _s3_client is None:
+        if not config.AWS_ACCESS_KEY_ID or not config.AWS_SECRET_ACCESS_KEY:
+            print("Warning: AWS credentials not configured, S3 uploads disabled")
+            return None
+
+        _s3_client = boto3.client(
+            's3',
+            endpoint_url=config.AWS_ENDPOINT_URL,
+            aws_access_key_id=config.AWS_ACCESS_KEY_ID,
+            aws_secret_access_key=config.AWS_SECRET_ACCESS_KEY,
+            config=BotoConfig(signature_version='s3v4'),
+            region_name=config.AWS_REGION
+        )
+
+    return _s3_client
 
 
 def upload_reported_image(image_buffer, filename, bucket):
-    """Upload an image to the specified S3 bucket."""
+    """Upload an image to the specified S3 bucket. Fails gracefully if S3 is not configured."""
+    s3 = _get_s3_client()
+
+    if s3 is None:
+        print(f"S3 upload skipped (disabled or not configured): {filename}")
+        return False
+
     try:
         print(f"Uploading image: {filename} to bucket: {bucket}")
         image_buffer.seek(0)  # Ensure buffer is at the start
         s3.upload_fileobj(image_buffer, bucket, filename)
         print(f"Image successfully uploaded to bucket: {bucket}")
+        return True
     except Exception as e:
-        print(f"Error uploading image: {str(e)}")
-        raise
+        print(f"Warning: S3 upload failed (non-fatal): {str(e)}")
+        return False
 
 
 # Bucket name constants from config
