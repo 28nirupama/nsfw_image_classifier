@@ -113,3 +113,34 @@
 2026-01-24 23:54:47,333 | ERROR | Error during prediction: name 'get_prediction_from_external_api' is not defined
 2026-01-24 23:54:47,334 | INFO | PREDICT_UPLOAD | 128.96 ms
 2026-01-24 23:54:47,334 | INFO | 192.168.43.224 - - [24/Jan/2026 23:54:47] "[35m[1mPOST /predict-upload HTTP/1.1[0m" 500 -
+2026-01-24 23:58:13,437 | INFO | [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.43.224:5000
+2026-01-24 23:58:13,438 | INFO | [33mPress CTRL+C to quit[0m
+2026-01-24 23:58:13,464 | INFO |  * Restarting with watchdog (windowsapi)
+2026-01-24 23:58:20,968 | WARNING |  * Debugger is active!
+2026-01-24 23:58:20,975 | INFO |  * Debugger PIN: 140-479-292
+2026-01-24 23:58:27,633 | INFO | 192.168.43.224 - - [24/Jan/2026 23:58:27] "GET / HTTP/1.1" 200 -
+2026-01-24 23:58:27,732 | INFO | 192.168.43.224 - - [24/Jan/2026 23:58:27] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-01-24 23:58:27,744 | INFO | 192.168.43.224 - - [24/Jan/2026 23:58:27] "[36mGET /static/js/app.js HTTP/1.1[0m" 304 -
+2026-01-24 23:58:42,316 | ERROR | HTTP error occurred: 404 Client Error: Not Found for url: https://nsfw-detection.todos.monster/predict
+2026-01-24 23:58:42,316 | ERROR | Error during prediction: 404 Client Error: Not Found for url: https://nsfw-detection.todos.monster/predict
+2026-01-24 23:58:42,332 | INFO | PREDICT_UPLOAD | 8309.09 ms
+2026-01-24 23:58:42,333 | INFO | 192.168.43.224 - - [24/Jan/2026 23:58:42] "[35m[1mPOST /predict-upload HTTP/1.1[0m" 500 -
+2026-01-25 00:05:28,279 | INFO | [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.43.224:5000
+2026-01-25 00:05:28,280 | INFO | [33mPress CTRL+C to quit[0m
+2026-01-25 00:05:28,305 | INFO |  * Restarting with watchdog (windowsapi)
+2026-01-25 00:05:35,927 | WARNING |  * Debugger is active!
+2026-01-25 00:05:35,935 | INFO |  * Debugger PIN: 140-479-292
+2026-01-25 00:05:44,064 | INFO | 127.0.0.1 - - [25/Jan/2026 00:05:44] "GET / HTTP/1.1" 200 -
+2026-01-25 00:05:44,186 | INFO | 127.0.0.1 - - [25/Jan/2026 00:05:44] "GET /static/css/style.css HTTP/1.1" 200 -
+2026-01-25 00:05:44,187 | INFO | 127.0.0.1 - - [25/Jan/2026 00:05:44] "GET /static/js/app.js HTTP/1.1" 200 -
+2026-01-25 00:05:44,231 | INFO | 127.0.0.1 - - [25/Jan/2026 00:05:44] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2026-01-25 00:05:54,726 | ERROR | HTTP error occurred: 404 Client Error: Not Found for url: https://nsfw-detection.todos.monster/predict
+2026-01-25 00:05:54,727 | ERROR | Error during prediction: 404 Client Error: Not Found for url: https://nsfw-detection.todos.monster/predict
+2026-01-25 00:05:54,727 | INFO | PREDICT_UPLOAD | 4542.55 ms
+2026-01-25 00:05:54,728 | INFO | 127.0.0.1 - - [25/Jan/2026 00:05:54] "[35m[1mPOST /predict-upload HTTP/1.1[0m" 500 -

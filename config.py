@@ -7,7 +7,6 @@ try:
 except ImportError:
     pass  # python-dotenv not installed, rely on system environment variables
 
-
 class Config:
     """Base configuration with default values."""
 
@@ -21,8 +20,8 @@ class Config:
     # Debug mode: enabled only in development
     DEBUG = FLASK_ENV == 'development'
 
-    # AWS S3 Configuration (supports both AWS_ENDPOINT_URL and STORAGE_ENDPOINT_URL)
-    AWS_ENDPOINT_URL = os.getenv('AWS_ENDPOINT_URL') or os.getenv('STORAGE_ENDPOINT_URL', 'https://storage.todos.monster')
+    # AWS S3 Configuration
+    AWS_ENDPOINT_URL = os.getenv('STORAGE_ENDPOINT_URL', 'https://storage.todos.monster')
     AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
     AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
     AWS_REGION = os.getenv('AWS_REGION', 'us-east-1')
@@ -33,14 +32,11 @@ class Config:
     S3_BUCKET_SFW_REPORTED = os.getenv('S3_BUCKET_SFW_REPORTED', 'sfwreported')
     S3_BUCKET_SAFE_REPORTED = os.getenv('S3_BUCKET_SAFE_REPORTED', 'safereported')
 
-    # External API
-    PREDICTION_API_URL = os.getenv('PREDICTION_API_URL', 'https://nsfw-detection.todos.monster/predict')
-
     # Model settings
     MODEL_PATH = os.getenv('MODEL_PATH', 'resnet50_nsfw_finetuned.pt')
     NSFW_THRESHOLD = float(os.getenv('NSFW_THRESHOLD', 0.8))
 
-    # Request settings
+    # Timeout for API requests
     REQUEST_TIMEOUT = int(os.getenv('REQUEST_TIMEOUT', 10))
 
     @classmethod
