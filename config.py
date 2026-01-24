@@ -21,7 +21,7 @@ class Config:
     DEBUG = FLASK_ENV == 'development'
 
     # AWS S3 Configuration
-    AWS_ENDPOINT_URL = os.getenv('STORAGE_ENDPOINT_URL', 'https://storage.todos.monster')
+    AWS_ENDPOINT_URL = os.getenv('AWS_ENDPOINT_URL') or os.getenv('STORAGE_ENDPOINT_URL', 'https://storage.todos.monster')
     AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
     AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
     AWS_REGION = os.getenv('AWS_REGION', 'us-east-1')
@@ -40,7 +40,7 @@ class Config:
     REQUEST_TIMEOUT = int(os.getenv('REQUEST_TIMEOUT', 10))
 
     # S3 Upload flag: Controls whether image uploads to S3 are enabled or not
-    S3_UPLOAD_ENABLED = os.getenv('S3_UPLOAD_ENABLED', 'True') == 'True'  # Default to True if not set
+    S3_UPLOAD_ENABLED = os.getenv('S3_UPLOAD_ENABLED', 'true').lower() == 'true'  # Default to True if not set
 
     @classmethod
     def validate(cls):
