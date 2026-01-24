@@ -81,23 +81,26 @@ def predict_upload():
     # Save image temporarily for reporting
     buffer = BytesIO()
     image.save(buffer, format="JPEG")
-    buffer.seek(0)
-    app.config["LAST_UPLOADED_IMAGE"] = buffer.getvalue()
+    buffer.seek(0)  # Important: Ensure buffer is at the start
 
-    # Determine the bucket based on prediction
-    if result["prediction"] == "NSFW":
-        bucket = 'nsfwreported'
-    else:
-        bucket = 'sfwreported'
-
-    # Upload to the respective bucket
+    # Don't close the buffer here, keep it open for uploading
     try:
+        # Determine the bucket based on prediction
+        if result["prediction"] == "NSFW":
+            bucket = 'nsfwreported'
+        else:
+            bucket = 'sfwreported'
+
+        # Generate filename with timestamp
         filename = f"{result['prediction']}_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}.jpg"
+        
+        # Upload to the respective bucket
         upload_reported_image(buffer, filename, bucket)  # Upload to correct bucket
         # Also upload to 'allimages' bucket for record-keeping
         upload_reported_image(buffer, filename, 'allimages')
 
         return jsonify(result)
+
     except Exception as e:
         return jsonify({"error": f"Failed to upload image: {str(e)}"}), 500
 
