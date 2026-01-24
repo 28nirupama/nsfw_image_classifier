@@ -4,6 +4,10 @@ FROM python:3.10-slim
 # Set the working directory inside the container
 WORKDIR /app
 
+# Set production environment by default
+# Override with docker run -e FLASK_ENV=development for local testing
+ENV FLASK_ENV=production
+
 # Copy the requirements file into the container
 COPY requirements.txt .
 

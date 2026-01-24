@@ -8,9 +8,13 @@ import datetime
 import time
 import logging
 from functools import wraps
+from config import config
 from rustfs_test import upload_reported_image  # Upload helper for AWS S3
 
 app = Flask(__name__)
+
+# Configure Flask based on environment
+app.config['DEBUG'] = config.DEBUG
 
 # Folder to store reported images
 REPORT_DIR = "reported_images"
@@ -62,7 +66,7 @@ def predict_url():
 
     try:
         # Fetch image from URL
-        response = requests.get(image_url, timeout=10)
+        response = requests.get(image_url, timeout=config.REQUEST_TIMEOUT)
         response.raise_for_status()
         image = Image.open(BytesIO(response.content)).convert("RGB")
 
@@ -162,7 +166,7 @@ def report():
     if source_type == "url":
         image_url = request.form.get("image_url")
         try:
-            response = requests.get(image_url, timeout=10)
+            response = requests.get(image_url, timeout=config.REQUEST_TIMEOUT)
             response.raise_for_status()  # Raise an exception for bad HTTP responses
             image = Image.open(BytesIO(response.content)).convert("RGB")
         except requests.exceptions.RequestException as e:
@@ -191,8 +195,11 @@ def report():
 
 
 def get_prediction_from_external_api(image_url):
-    prediction_api_url = "https://nsfw-detection.todos.monster/predict"
-    response = requests.post(prediction_api_url, json={"image_url": image_url})
+    response = requests.post(
+        config.PREDICTION_API_URL,
+        json={"image_url": image_url},
+        timeout=config.REQUEST_TIMEOUT
+    )
 
     if response.status_code == 200:
         result = response.json()
@@ -206,4 +213,6 @@ def get_prediction_from_external_api(image_url):
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000, debug=True)
+    print(f"Starting server in {config.FLASK_ENV} mode...")
+    print(f"Debug mode: {config.DEBUG}")
+    app.run(host=config.HOST, port=config.PORT, debug=config.DEBUG)
