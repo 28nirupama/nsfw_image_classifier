@@ -1,0 +1,10 @@
+[2026-01-24 08:01:25.053347 +05:30] ERROR [s3s::ops] [C:\Users\runneradmin\.cargo\git\checkouts\s3s-5cf49da3e5499213\df2434d\crates\s3s\src\ops\mod.rs:262] [rustfs-worker:ThreadId(16)] custom route returns error err=S3Error(Inner { code: AccessDenied, message: Some("Signature is required"), request_id: None, status_code: None, source: None, headers: None })
+
+[2026-01-24 08:01:29.200260 +05:30] ERROR [s3s::ops] [C:\Users\runneradmin\.cargo\git\checkouts\s3s-5cf49da3e5499213\df2434d\crates\s3s\src\ops\mod.rs:262] [rustfs-worker:ThreadId(15)] custom route returns error err=S3Error(Inner { code: AccessDenied, message: Some("Signature is required"), request_id: None, status_code: None, source: None, headers: None })
+
+[2026-01-24 08:01:30.031646 +05:30] ERROR [s3s::ops] [C:\Users\runneradmin\.cargo\git\checkouts\s3s-5cf49da3e5499213\df2434d\crates\s3s\src\ops\mod.rs:262] [rustfs-worker:ThreadId(7)] custom route returns error err=S3Error(Inner { code: AccessDenied, message: Some("Signature is required"), request_id: None, status_code: None, source: None, headers: None })
+
+[2026-01-24 08:22:51.850208 +05:30] ERROR [rustfs] [rustfs\src\main.rs:132] [main:ThreadId(1)] Server encountered an error and is shutting down: host in server address should be this server
+
+[2026-01-24 08:23:00.533806 +05:30] ERROR [rustfs] [rustfs\src\main.rs:132] [main:ThreadId(1)] Server encountered an error and is shutting down: host in server address should be this server
+

@@ -1,0 +1,14 @@
+[2026-01-24 00:03:39.061900 +05:30] ERROR [rustfs_ecstore::disk::local] [crates\ecstore\src\disk\local.rs:276] [rustfs-worker:ThreadId(14)] cleanup_deleted_objects error: Io(Os { code: 5, kind: PermissionDenied, message: "Access is denied." })
+
+[2026-01-24 00:13:39.062008 +05:30] ERROR [rustfs_ecstore::disk::local] [crates\ecstore\src\disk\local.rs:276] [rustfs-worker:ThreadId(5)] cleanup_deleted_objects error: Io(Os { code: 5, kind: PermissionDenied, message: "Access is denied." })
+
+[2026-01-24 00:23:39.063735 +05:30] ERROR [rustfs_ecstore::disk::local] [crates\ecstore\src\disk\local.rs:276] [rustfs-worker:ThreadId(15)] cleanup_deleted_objects error: Io(Os { code: 5, kind: PermissionDenied, message: "Access is denied." })
+
+[2026-01-24 00:33:39.064852 +05:30] ERROR [rustfs_ecstore::disk::local] [crates\ecstore\src\disk\local.rs:276] [rustfs-worker:ThreadId(15)] cleanup_deleted_objects error: Io(Os { code: 5, kind: PermissionDenied, message: "Access is denied." })
+
+[2026-01-24 00:38:39.061579 +05:30] ERROR [rustfs_ecstore::disk::local] [crates\ecstore\src\disk\local.rs:276] [rustfs-worker:ThreadId(14)] cleanup_deleted_objects error: Io(Os { code: 5, kind: PermissionDenied, message: "Access is denied." })
+
+[2026-01-24 00:43:39.059866 +05:30] ERROR [rustfs_ecstore::disk::local] [crates\ecstore\src\disk\local.rs:276] [rustfs-worker:ThreadId(5)] cleanup_deleted_objects error: Io(Os { code: 5, kind: PermissionDenied, message: "Access is denied." })
+
+[2026-01-24 00:48:39.063945 +05:30] ERROR [rustfs_ecstore::disk::local] [crates\ecstore\src\disk\local.rs:276] [rustfs-worker:ThreadId(15)] cleanup_deleted_objects error: Io(Os { code: 5, kind: PermissionDenied, message: "Access is denied." })
+
