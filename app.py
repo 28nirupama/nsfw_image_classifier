@@ -9,7 +9,7 @@ import time
 import logging
 import json
 from functools import wraps
-from rustfs_test import upload_uploaded_image, upload_reported_image
+from rustfs_test import upload_reported_image
 
 app = Flask(__name__)
 
