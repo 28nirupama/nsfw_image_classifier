@@ -28,7 +28,7 @@ document.getElementById("imageUrl").addEventListener("input", () => {
 
 
 // ----------------------
-// Predict from URL
+// Predict from URL (External API)
 // ----------------------
 async function predictURL() {
     const url = document.getElementById("imageUrl").value;
@@ -41,7 +41,7 @@ async function predictURL() {
 
     resBox.innerHTML = "Analyzing image...";
 
-    const res = await fetch(`${BASE_URL}/predict`, {
+    const res = await fetch(`${BASE_URL}/predict-url`, {  // Changed to /predict-url
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ image_url: url })
@@ -74,7 +74,7 @@ async function predictURL() {
 
 
 // ----------------------
-// Predict from Upload
+// Predict from Upload (Local)
 // ----------------------
 async function predictUpload() {
     const fileInput = document.getElementById("imageFile");
@@ -90,7 +90,7 @@ async function predictUpload() {
     const formData = new FormData();
     formData.append("file", fileInput.files[0]);
 
-    const res = await fetch(`${BASE_URL}/predict-upload`, {
+    const res = await fetch(`${BASE_URL}/predict-upload`, {  // This remains unchanged (local uploads)
         method: "POST",
         body: formData
     });
@@ -123,10 +123,6 @@ async function predictUpload() {
 // ----------------------
 // Report Incorrect Prediction
 // ----------------------
-// ----------------------
-// Report Incorrect Prediction
-// ----------------------
-// Frontend: Reporting function after prediction and upload
 async function reportPrediction() {
     if (!lastPrediction.sourceType) {
         alert("No prediction to report");
@@ -144,19 +140,19 @@ async function reportPrediction() {
         formData.append("image_url", lastPrediction.imageUrl);
     }
 
-    const res = await fetch(`${BASE_URL}/predict-upload`, {
+    const res = await fetch(`${BASE_URL}/predict-upload`, {  // This should still call the same endpoint for reporting
         method: "POST",
         body: formData
     });
 
     const data = await res.json();
-    
+
     // Show the success message based on where the prediction came from
     if (data.message) {
         alert(`${data.message}`); // Display either message from localhost or external API
     } else if (data.error) {
         alert(`Error: ${data.error}`);
     }
-    
+
     document.getElementById("reportBtn").style.display = "none";
 }

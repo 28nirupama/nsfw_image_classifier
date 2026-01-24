@@ -77,9 +77,8 @@ def predict_url():
         buffer = BytesIO()
         image.save(buffer, format="JPEG")
         buffer.seek(0)
-        upload_reported_image(buffer, filename, 'allimages')
 
-        # Upload to the respective reported bucket based on the prediction
+        # Only store the image in the correct bucket based on prediction (NSFW/SFW)
         if external_prediction['prediction'] == 'NSFW':
             upload_reported_image(buffer, filename, 'nsfwreported')
         elif external_prediction['prediction'] == 'SFW':
@@ -110,29 +109,12 @@ def predict_upload():
 
     result = predict_pil_image(image)
 
-    # Save image temporarily for reporting
-    buffer = BytesIO()
-    image.save(buffer, format="JPEG")
-    buffer.seek(0)  # Ensure buffer is at the start
-
-    try:
-        # Generate filename with timestamp
-        filename = f"{result['prediction']}_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}.jpg"
-        
-        # Upload to allimages bucket
-        upload_reported_image(buffer, filename, 'allimages')
-
-        # Upload to the appropriate bucket based on prediction
-        if result["prediction"] == "NSFW":
-            upload_reported_image(buffer, filename, 'nsfwreported')
-        else:
-            upload_reported_image(buffer, filename, 'sfwreported')
-
-        # Return success message for frontend (for localhost)
-        return jsonify({"message": "localhost:5000 says: Image reported successfully!"})
-
-    except Exception as e:
-        return jsonify({"error": f"Failed to upload image: {str(e)}"}), 500
+    # Return the prediction result without storing the image
+    return jsonify({
+        "prediction": result["prediction"],
+        "sfw_confidence": result["sfw_confidence"],
+        "nsfw_confidence": result["nsfw_confidence"]
+    })
 
 
 # -----------------------
