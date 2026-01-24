@@ -7,18 +7,13 @@ import datetime
 import time
 import logging
 from functools import wraps
+from config import config
 from rustfs_test import upload_reported_image  # Upload helper for AWS S3
-from dotenv import load_dotenv
-
-# Load environment variables from .env file
-load_dotenv()
-
-# Ensure the environment variables are loaded correctly
-PREDICTION_API_URL = os.getenv("PREDICTION_API_URL")
-if not PREDICTION_API_URL:
-    raise EnvironmentError("Missing PREDICTION_API_URL. Please check your .env file.")
 
 app = Flask(__name__)
+
+# Configure Flask based on environment
+app.config['DEBUG'] = config.DEBUG
 
 # Folder to store reported images
 REPORT_DIR = "reported_images"
@@ -65,7 +60,7 @@ def predict_url():
 
     try:
         # Fetch image from URL
-        response = requests.get(image_url, timeout=10)
+        response = requests.get(image_url, timeout=config.REQUEST_TIMEOUT)
         response.raise_for_status()
         image = Image.open(BytesIO(response.content)).convert("RGB")
 
@@ -116,8 +111,12 @@ def report_prediction():
 
 def get_prediction_from_external_api(image_url):
     try:
-        response = requests.post(PREDICTION_API_URL, json={"image_url": image_url})
-        response.raise_for_status()  
+        response = requests.post(
+            config.PREDICTION_API_URL,
+            json={"image_url": image_url},
+            timeout=config.REQUEST_TIMEOUT
+        )
+        response.raise_for_status()
         result = response.json()
         return {
             "prediction": result.get("prediction"),
@@ -136,4 +135,6 @@ def get_prediction_from_external_api(image_url):
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000, debug=False)
+    print(f"Starting server in {config.FLASK_ENV} mode...")
+    print(f"Debug mode: {config.DEBUG}")
+    app.run(host=config.HOST, port=config.PORT, debug=config.DEBUG)
