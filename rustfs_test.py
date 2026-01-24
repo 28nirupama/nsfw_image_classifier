@@ -9,7 +9,7 @@ config = Config()
 # Set up your s3 client using boto3 with environment variables
 s3 = boto3.client(
     's3',
-    endpoint_url=config.STORAGE_ENDPOINT_URL,
+    endpoint_url=config.AWS_ENDPOINT_URL,
     aws_access_key_id=config.AWS_ACCESS_KEY_ID,
     aws_secret_access_key=config.AWS_SECRET_ACCESS_KEY,
     config=BotoConfig(signature_version='s3v4'),
