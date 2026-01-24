@@ -126,6 +126,7 @@ async function predictUpload() {
 // ----------------------
 // Report Incorrect Prediction
 // ----------------------
+// Frontend: Reporting function after prediction and upload
 async function reportPrediction() {
     if (!lastPrediction.sourceType) {
         alert("No prediction to report");
@@ -143,17 +144,19 @@ async function reportPrediction() {
         formData.append("image_url", lastPrediction.imageUrl);
     }
 
-    // Let the user specify the report type: 'nsfw', 'sfw', or 'safe'
-    const reportType = prompt("Enter report type: nsfw, sfw, or safe", "nsfw");
-    formData.append("report_type", reportType);
-
-    const res = await fetch(`${BASE_URL}/report`, {
+    const res = await fetch(`${BASE_URL}/predict-upload`, {
         method: "POST",
         body: formData
     });
 
     const data = await res.json();
-    alert(data.message || "Reported successfully");
-
+    
+    // Show the success message based on where the prediction came from
+    if (data.message) {
+        alert(`${data.message}`); // Display either message from localhost or external API
+    } else if (data.error) {
+        alert(`Error: ${data.error}`);
+    }
+    
     document.getElementById("reportBtn").style.display = "none";
 }

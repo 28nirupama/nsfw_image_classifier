@@ -84,93 +84,85 @@ def predict_upload():
     buffer.seek(0)  # Ensure buffer is at the start
 
     try:
-        # Upload to nsfwreported bucket
-        if result["prediction"] == "NSFW":
-            bucket = 'nsfwreported'
-        else:
-            bucket = 'sfwreported'
-
         # Generate filename with timestamp
         filename = f"{result['prediction']}_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}.jpg"
         
-        # First upload to nsfwreported bucket
-        upload_reported_image(buffer, filename, bucket)
-        
-        # Recreate the buffer for the second upload to 'allimages' bucket
-        buffer = BytesIO()  # Recreate the buffer (empty buffer now)
-        image.save(buffer, format="JPEG")  # Save image again to the new buffer
-        buffer.seek(0)  # Reset buffer before uploading
-
         # Upload to allimages bucket
         upload_reported_image(buffer, filename, 'allimages')
 
-        return jsonify(result)
+        # Upload to the appropriate bucket based on prediction
+        if result["prediction"] == "NSFW":
+            upload_reported_image(buffer, filename, 'nsfwreported')
+        else:
+            upload_reported_image(buffer, filename, 'sfwreported')
+
+        # Return success message for frontend (for localhost)
+        return jsonify({"message": "localhost:5000 says: Image reported successfully!"})
 
     except Exception as e:
         return jsonify({"error": f"Failed to upload image: {str(e)}"}), 500
-
 
 
 # -----------------------
 # Report Incorrect Prediction
 # -----------------------
 # In app.py, inside the /report route
-@app.route('/report', methods=['POST'])
-@measure_time("REPORT_IMAGE")
-def report():
-    predicted_label = request.form.get("prediction")
-    source_type = request.form.get("source_type")
-    report_type = request.form.get("report_type")  # "nsfw", "sfw", or "safe"
+@app.route('/predict', methods=['POST'])
+@measure_time("PREDICT_URL")
+def predict():
+    data = request.get_json()
+    image_url = data.get("image_url")
 
-    if not predicted_label or not source_type or not report_type:
-        return jsonify({"error": "Invalid report data"})
+    if not image_url:
+        return jsonify({"error": "No image URL provided"})
 
-    # Determine the bucket based on report_type
-    if report_type == "nsfw":
-        bucket = 'nsfwreported'
-    elif report_type == "sfw":
-        bucket = 'sfwreported'
-    elif report_type == "safe":
-        bucket = 'safereported'  # New bucket for safe images
-    else:
-        return jsonify({"error": "Unknown report type"}), 400
-
-    # Get the image based on source_type (URL or upload)
-    image = None
-    image_bytes = None
-
-    if source_type == "url":
-        image_url = request.form.get("image_url")
-        try:
-            response = requests.get(image_url, timeout=10)
-            response.raise_for_status()  # Raise an exception for bad HTTP responses
-            image = Image.open(BytesIO(response.content)).convert("RGB")
-        except requests.exceptions.RequestException as e:
-            return jsonify({"error": f"Failed to fetch image from URL: {str(e)}"}), 400
-    elif source_type == "upload":
-        image_bytes = app.config.get("LAST_UPLOADED_IMAGE")
-        image = Image.open(BytesIO(image_bytes)).convert("RGB")
-    else:
-        return jsonify({"error": "Unknown source type"})
-
-    # Prepare filename
-    timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
-    filename = f"{predicted_label}_{timestamp}.jpg"
-
-    # Save image to memory buffer
-    buffer = BytesIO()
-    image.save(buffer, format="JPEG")
-    buffer.seek(0)
-
-    # Upload to cloud (S3-compatible bucket)
     try:
-        upload_reported_image(buffer, filename, bucket)  # Upload to correct bucket
-        # Also upload to 'allimages' bucket for record-keeping
+        # Fetch image from URL
+        response = requests.get(image_url, timeout=10)
+        response.raise_for_status()
+        image = Image.open(BytesIO(response.content)).convert("RGB")
+
+        # Get prediction from external API
+        external_prediction = get_prediction_from_external_api(image_url)
+
+        # Define filename
+        filename = f"{external_prediction['prediction']}_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}.jpg"
+
+        # Upload the image to the `allimages` bucket
+        buffer = BytesIO()
+        image.save(buffer, format="JPEG")
+        buffer.seek(0)
         upload_reported_image(buffer, filename, 'allimages')
 
-        return jsonify({"message": "Image reported and uploaded successfully"})
+        # Upload to the respective reported bucket based on the prediction
+        if external_prediction['prediction'] == 'NSFW':
+            upload_reported_image(buffer, filename, 'nsfwreported')
+        elif external_prediction['prediction'] == 'SFW':
+            upload_reported_image(buffer, filename, 'sfwreported')
+        else:
+            upload_reported_image(buffer, filename, 'safereported')
+
+        # Return success message for frontend (for external API)
+        return jsonify({"message": "nsfw-detection.todos.monster says: Image reported successfully!"})
+
+    except requests.exceptions.RequestException as e:
+        return jsonify({"error": f"Failed to fetch image from URL: {str(e)}"}), 400
     except Exception as e:
-        return jsonify({"error": f"Failed to upload image: {str(e)}"}), 500
+        return jsonify({"error": f"Error during prediction: {str(e)}"}), 500
+
+def get_prediction_from_external_api(image_url):
+    prediction_api_url = "https://nsfw-detection.todos.monster/predict"
+    response = requests.post(prediction_api_url, json={"image_url": image_url})
+
+    if response.status_code == 200:
+        result = response.json()
+        return {
+            "prediction": result.get("prediction"),
+            "sfw_confidence": result.get("sfw_confidence"),
+            "nsfw_confidence": result.get("nsfw_confidence"),
+        }
+    else:
+        raise Exception(f"Error from external API: {response.status_code}")
 
 
 if __name__ == "__main__":
