@@ -96,8 +96,11 @@ def predict_upload():
         # First upload to nsfwreported bucket
         upload_reported_image(buffer, filename, bucket)
         
-        # Recreate the buffer for the second upload
-        buffer.seek(0)  # Reset buffer before re-uploading
+        # Recreate the buffer for the second upload to 'allimages' bucket
+        buffer = BytesIO()  # Recreate the buffer (empty buffer now)
+        image.save(buffer, format="JPEG")  # Save image again to the new buffer
+        buffer.seek(0)  # Reset buffer before uploading
+
         # Upload to allimages bucket
         upload_reported_image(buffer, filename, 'allimages')
 
