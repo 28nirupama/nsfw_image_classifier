@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify, render_template
+from model import predict_pil_image
 from PIL import Image
 from io import BytesIO
 import requests
@@ -64,11 +65,11 @@ def predict_url():
         response.raise_for_status()
         image = Image.open(BytesIO(response.content)).convert("RGB")
 
-        # Get prediction from external API
-        external_prediction = get_prediction_from_external_api(image_url)
+        # Get prediction using local model
+        prediction_result = predict_pil_image(image, threshold=config.NSFW_THRESHOLD)
 
         # Define filename
-        filename = f"{external_prediction['prediction']}_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}.jpg"
+        filename = f"{prediction_result['prediction']}_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}.jpg"
 
         # Upload the image to the `allimages` bucket
         buffer = BytesIO()
@@ -78,12 +79,18 @@ def predict_url():
         upload_reported_image(buffer, filename, 'allimages')  # Always store in allimages
 
         # Store the image in the appropriate S3 bucket based on prediction
-        if external_prediction['prediction'] == 'NSFW':
+        if prediction_result['prediction'] == 'NSFW':
             upload_reported_image(buffer, filename, 'nsfwreported')
-        elif external_prediction['prediction'] == 'SFW':
+        elif prediction_result['prediction'] == 'SFW':
             upload_reported_image(buffer, filename, 'sfwreported')
 
-        return jsonify({"message": "nsfw-detection.todos.monster says: Image reported successfully!"})
+        return jsonify({
+            "prediction": prediction_result['prediction'],
+            "confidence": prediction_result['confidence'],
+            "sfw_confidence": prediction_result['sfw_confidence'],
+            "nsfw_confidence": prediction_result['nsfw_confidence'],
+            "message": "Image classified successfully!"
+        })
 
     except requests.exceptions.RequestException as e:
         logging.error(f"Failed to fetch image from URL: {str(e)}")
@@ -107,31 +114,6 @@ def report_prediction():
     logging.info(f"Reported Prediction - Prediction: {prediction}, Source: {source_type}, Image URL: {image_url}")
 
     return jsonify({"message": "Prediction reported successfully!"}), 200
-
-
-def get_prediction_from_external_api(image_url):
-    try:
-        response = requests.post(
-            config.PREDICTION_API_URL,
-            json={"image_url": image_url},
-            timeout=config.REQUEST_TIMEOUT
-        )
-        response.raise_for_status()
-        result = response.json()
-        return {
-            "prediction": result.get("prediction"),
-            "sfw_confidence": result.get("sfw_confidence"),
-            "nsfw_confidence": result.get("nsfw_confidence"),
-        }
-    except requests.exceptions.HTTPError as http_err:
-        logging.error(f"HTTP error occurred: {http_err}")
-        raise
-    except requests.exceptions.RequestException as req_err:
-        logging.error(f"Request error occurred: {req_err}")
-        raise
-    except ValueError as json_err:
-        logging.error(f"Error decoding JSON response: {json_err}")
-        raise
 
 
 if __name__ == "__main__":
