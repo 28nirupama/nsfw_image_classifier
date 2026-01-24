@@ -8,13 +8,13 @@ import datetime
 import time
 import logging
 from functools import wraps
-from config import config
+from config import config  # Import the centralized configuration class
 from rustfs_test import upload_reported_image  # Upload helper for AWS S3
 
 app = Flask(__name__)
 
 # Configure Flask based on environment
-app.config['DEBUG'] = config.DEBUG
+app.config['DEBUG'] = config.DEBUG  # Enable debug based on FLASK_ENV
 
 # Folder to store reported images
 REPORT_DIR = "reported_images"
@@ -65,7 +65,7 @@ def predict_url():
         response.raise_for_status()
         image = Image.open(BytesIO(response.content)).convert("RGB")
 
-        # Get prediction using local model
+        # Get prediction using the local model
         prediction_result = predict_pil_image(image, threshold=config.NSFW_THRESHOLD)
 
         # Define filename
@@ -76,13 +76,13 @@ def predict_url():
         image.thumbnail((1024, 1024))  # Resize image before saving
         image.save(buffer, format="JPEG")
         buffer.seek(0)  # Ensure the buffer is at the start
-        upload_reported_image(buffer, filename, 'allimages')  # Always store in allimages
+        upload_reported_image(buffer, filename, config.S3_BUCKET_ALL_IMAGES)  # Always store in allimages
 
         # Store the image in the appropriate S3 bucket based on prediction
         if prediction_result['prediction'] == 'NSFW':
-            upload_reported_image(buffer, filename, 'nsfwreported')
+            upload_reported_image(buffer, filename, config.S3_BUCKET_NSFW_REPORTED)
         elif prediction_result['prediction'] == 'SFW':
-            upload_reported_image(buffer, filename, 'sfwreported')
+            upload_reported_image(buffer, filename, config.S3_BUCKET_SFW_REPORTED)
 
         return jsonify({
             "prediction": prediction_result['prediction'],
@@ -122,13 +122,13 @@ def predict_upload():
         image.thumbnail((1024, 1024))  # Resize image before saving
         image.save(buffer, format="JPEG")
         buffer.seek(0)  # Ensure the buffer is at the start
-        upload_reported_image(buffer, filename, 'allimages')  # Always store in allimages
+        upload_reported_image(buffer, filename, config.S3_BUCKET_ALL_IMAGES)  # Always store in allimages
 
         # Store the image in the appropriate S3 bucket based on prediction
         if external_prediction['prediction'] == 'NSFW':
-            upload_reported_image(buffer, filename, 'nsfwreported')
+            upload_reported_image(buffer, filename, config.S3_BUCKET_NSFW_REPORTED)
         elif external_prediction['prediction'] == 'SFW':
-            upload_reported_image(buffer, filename, 'sfwreported')
+            upload_reported_image(buffer, filename, config.S3_BUCKET_SFW_REPORTED)
 
         # Return success message for frontend
         return jsonify({"message": "Image uploaded and reported successfully!"})
