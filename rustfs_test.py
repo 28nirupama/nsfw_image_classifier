@@ -15,6 +15,12 @@ def _get_s3_client():
         return None
 
     if _s3_client is None:
+        # Debug: log AWS configuration
+        print(f"DEBUG S3 Config - endpoint: {config.AWS_ENDPOINT_URL}")
+        print(f"DEBUG S3 Config - access_key: {config.AWS_ACCESS_KEY_ID[:8] if config.AWS_ACCESS_KEY_ID else 'None'}...")
+        print(f"DEBUG S3 Config - secret_key: {'***set***' if config.AWS_SECRET_ACCESS_KEY else 'None'}")
+        print(f"DEBUG S3 Config - region: {config.AWS_REGION}")
+
         if not config.AWS_ACCESS_KEY_ID or not config.AWS_SECRET_ACCESS_KEY:
             print("Warning: AWS credentials not configured, S3 uploads disabled")
             return None
