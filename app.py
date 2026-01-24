@@ -83,9 +83,8 @@ def predict_upload():
     image.save(buffer, format="JPEG")
     buffer.seek(0)  # Ensure buffer is at the start
 
-    # Don't close the buffer here, keep it open for uploading
     try:
-        # Determine the bucket based on prediction
+        # Upload to nsfwreported bucket
         if result["prediction"] == "NSFW":
             bucket = 'nsfwreported'
         else:
@@ -94,9 +93,12 @@ def predict_upload():
         # Generate filename with timestamp
         filename = f"{result['prediction']}_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}.jpg"
         
-        # Upload to the respective bucket
-        upload_reported_image(buffer, filename, bucket)  # Upload to correct bucket
-        # Also upload to 'allimages' bucket for record-keeping
+        # First upload to nsfwreported bucket
+        upload_reported_image(buffer, filename, bucket)
+        
+        # Recreate the buffer for the second upload
+        buffer.seek(0)  # Reset buffer before re-uploading
+        # Upload to allimages bucket
         upload_reported_image(buffer, filename, 'allimages')
 
         return jsonify(result)
