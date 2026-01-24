@@ -111,11 +111,11 @@ def predict_upload():
         # Process the uploaded image file
         image = Image.open(file).convert("RGB")
 
-        # Get prediction from the external API
-        external_prediction = get_prediction_from_external_api(file.filename)
+        # Get prediction using local model
+        prediction_result = predict_pil_image(image, threshold=config.NSFW_THRESHOLD)
 
         # Define filename
-        filename = f"{external_prediction['prediction']}_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}.jpg"
+        filename = f"{prediction_result['prediction']}_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}.jpg"
 
         # Upload the image to the `allimages` bucket
         buffer = BytesIO()
@@ -125,13 +125,18 @@ def predict_upload():
         upload_reported_image(buffer, filename, 'allimages')  # Always store in allimages
 
         # Store the image in the appropriate S3 bucket based on prediction
-        if external_prediction['prediction'] == 'NSFW':
+        if prediction_result['prediction'] == 'NSFW':
             upload_reported_image(buffer, filename, 'nsfwreported')
-        elif external_prediction['prediction'] == 'SFW':
+        elif prediction_result['prediction'] == 'SFW':
             upload_reported_image(buffer, filename, 'sfwreported')
 
-        # Return success message for frontend
-        return jsonify({"message": "Image uploaded and reported successfully!"})
+        return jsonify({
+            "prediction": prediction_result['prediction'],
+            "confidence": prediction_result['confidence'],
+            "sfw_confidence": prediction_result['sfw_confidence'],
+            "nsfw_confidence": prediction_result['nsfw_confidence'],
+            "message": "Image classified successfully!"
+        })
 
     except Exception as e:
         logging.error(f"Error during prediction: {str(e)}")
