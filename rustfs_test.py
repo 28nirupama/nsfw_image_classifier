@@ -13,13 +13,14 @@ s3 = boto3.client(
 )
 
 def upload_reported_image(image_buffer, filename, bucket):
-    """Uploads the reported image to the specified bucket"""
     try:
-        # Upload the image buffer to the specified bucket
+        print(f"Uploading image: {filename} to bucket: {bucket}")  # Log upload attempt
         s3.upload_fileobj(image_buffer, bucket, filename)
+        print(f"Image successfully uploaded to bucket: {bucket}")  # Log success
     except Exception as e:
-        # If any error occurs during upload, raise an exception
+        print(f"Error uploading image: {str(e)}")
         raise Exception(f"Error uploading image: {str(e)}")
+
 
 # These can be useful for static bucket references
 ALL_IMAGES_BUCKET = 'allimages'
