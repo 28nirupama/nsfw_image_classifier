@@ -123,6 +123,9 @@ async function predictUpload() {
 // ----------------------
 // Report Incorrect Prediction
 // ----------------------
+// ----------------------
+// Report Incorrect Prediction
+// ----------------------
 async function reportPrediction() {
     if (!lastPrediction.sourceType) {
         alert("No prediction to report");
@@ -136,10 +139,13 @@ async function reportPrediction() {
     formData.append("sfw_confidence", lastPrediction.sfw_confidence);
     formData.append("nsfw_confidence", lastPrediction.nsfw_confidence);
 
-
     if (lastPrediction.sourceType === "url") {
         formData.append("image_url", lastPrediction.imageUrl);
     }
+
+    // Let the user specify the report type: 'nsfw', 'sfw', or 'safe'
+    const reportType = prompt("Enter report type: nsfw, sfw, or safe", "nsfw");
+    formData.append("report_type", reportType);
 
     const res = await fetch(`${BASE_URL}/report`, {
         method: "POST",

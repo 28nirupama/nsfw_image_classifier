@@ -84,7 +84,23 @@ def predict_upload():
     buffer.seek(0)
     app.config["LAST_UPLOADED_IMAGE"] = buffer.getvalue()
 
-    return jsonify(result)
+    # Determine the bucket based on prediction
+    if result["prediction"] == "NSFW":
+        bucket = 'nsfwreported'
+    else:
+        bucket = 'sfwreported'
+
+    # Upload to the respective bucket
+    try:
+        filename = f"{result['prediction']}_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}.jpg"
+        upload_reported_image(buffer, filename, bucket)  # Upload to correct bucket
+        # Also upload to 'allimages' bucket for record-keeping
+        upload_reported_image(buffer, filename, 'allimages')
+
+        return jsonify(result)
+    except Exception as e:
+        return jsonify({"error": f"Failed to upload image: {str(e)}"}), 500
+
 
 
 # -----------------------
@@ -141,10 +157,12 @@ def report():
     # Upload to cloud (S3-compatible bucket)
     try:
         upload_reported_image(buffer, filename, bucket)  # Upload to correct bucket
+        # Also upload to 'allimages' bucket for record-keeping
+        upload_reported_image(buffer, filename, 'allimages')
+
         return jsonify({"message": "Image reported and uploaded successfully"})
     except Exception as e:
         return jsonify({"error": f"Failed to upload image: {str(e)}"}), 500
-
 
 
 if __name__ == "__main__":
