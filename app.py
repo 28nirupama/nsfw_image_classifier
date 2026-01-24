@@ -81,7 +81,7 @@ def predict_upload():
     # Save image temporarily for reporting
     buffer = BytesIO()
     image.save(buffer, format="JPEG")
-    buffer.seek(0)  # Important: Ensure buffer is at the start
+    buffer.seek(0)  # Ensure buffer is at the start
 
     # Don't close the buffer here, keep it open for uploading
     try:
