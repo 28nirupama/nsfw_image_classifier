@@ -1,5 +1,6 @@
 import boto3
 from botocore.client import Config as BotoConfig
+from io import BytesIO
 from config import config
 
 # Lazy initialization of S3 client
@@ -40,8 +41,11 @@ def upload_reported_image(image_buffer, filename, bucket):
 
     try:
         print(f"Uploading image: {filename} to bucket: {bucket}")
-        image_buffer.seek(0)  # Ensure buffer is at the start
-        s3.upload_fileobj(image_buffer, bucket, filename)
+        # Read content and create a fresh buffer to avoid corrupting the original
+        image_buffer.seek(0)
+        content = image_buffer.read()
+        upload_buffer = BytesIO(content)
+        s3.upload_fileobj(upload_buffer, bucket, filename)
         print(f"Image successfully uploaded to bucket: {bucket}")
         return True
     except Exception as e:
