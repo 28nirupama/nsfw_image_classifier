@@ -90,37 +90,60 @@ def predict_upload():
 # -----------------------
 # Report Incorrect Prediction
 # -----------------------
+# In app.py, inside the /report route
 @app.route('/report', methods=['POST'])
 @measure_time("REPORT_IMAGE")
 def report():
-
     predicted_label = request.form.get("prediction")
     source_type = request.form.get("source_type")
+    report_type = request.form.get("report_type")  # "nsfw", "sfw", or "safe"
 
-    if not predicted_label or not source_type:
+    if not predicted_label or not source_type or not report_type:
         return jsonify({"error": "Invalid report data"})
 
-    timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
-    save_dir = os.path.join(REPORT_DIR, f"predicted_{predicted_label.lower()}")
-    os.makedirs(save_dir, exist_ok=True)
+    # Determine the bucket based on report_type
+    if report_type == "nsfw":
+        bucket = 'nsfwreported'
+    elif report_type == "sfw":
+        bucket = 'sfwreported'
+    elif report_type == "safe":
+        bucket = 'safereported'  # New bucket for safe images
+    else:
+        return jsonify({"error": "Unknown report type"}), 400
+
+    # Get the image based on source_type (URL or upload)
+    image = None
+    image_bytes = None
 
     if source_type == "url":
         image_url = request.form.get("image_url")
-        response = requests.get(image_url, timeout=10)
-        image = Image.open(BytesIO(response.content)).convert("RGB")
-
+        try:
+            response = requests.get(image_url, timeout=10)
+            response.raise_for_status()  # Raise an exception for bad HTTP responses
+            image = Image.open(BytesIO(response.content)).convert("RGB")
+        except requests.exceptions.RequestException as e:
+            return jsonify({"error": f"Failed to fetch image from URL: {str(e)}"}), 400
     elif source_type == "upload":
         image_bytes = app.config.get("LAST_UPLOADED_IMAGE")
         image = Image.open(BytesIO(image_bytes)).convert("RGB")
-
     else:
         return jsonify({"error": "Unknown source type"})
 
+    # Prepare filename
+    timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
     filename = f"{predicted_label}_{timestamp}.jpg"
-    image.save(os.path.join(save_dir, filename))
 
-    return jsonify({"message": "Image reported successfully"})
+    # Save image to memory buffer
+    buffer = BytesIO()
+    image.save(buffer, format="JPEG")
+    buffer.seek(0)
 
+    # Upload to cloud (S3-compatible bucket)
+    try:
+        upload_reported_image(buffer, filename, bucket)  # Upload to correct bucket
+        return jsonify({"message": "Image reported and uploaded successfully"})
+    except Exception as e:
+        return jsonify({"error": f"Failed to upload image: {str(e)}"}), 500
 
 
 
