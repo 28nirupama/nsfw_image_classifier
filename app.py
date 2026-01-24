@@ -177,17 +177,23 @@ def report():
     timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
     filename = f"{predicted_label}_{timestamp}.jpg"
 
-    # Save image to memory buffer
+    # Save image temporarily for reporting
     buffer = BytesIO()
     image.save(buffer, format="JPEG")
-    buffer.seek(0)
 
-    # Upload to cloud (S3-compatible bucket)
-    try:
-        upload_reported_image(buffer, filename, bucket)  # Upload to correct bucket
-        return jsonify({"message": "Image reported and uploaded successfully"})
-    except Exception as e:
-        return jsonify({"error": f"Failed to upload image: {str(e)}"}), 500
+    # Reset the buffer pointer to the start before uploading
+    buffer.seek(0)  # This is necessary to ensure the buffer pointer is at the beginning
+
+    # Upload to allimages bucket
+    upload_reported_image(buffer, filename, 'allimages')
+
+    # Upload to the appropriate bucket based on prediction
+    if predicted_label == "NSFW":
+        upload_reported_image(buffer, filename, 'nsfwreported')
+    else:
+        upload_reported_image(buffer, filename, 'sfwreported')
+
+    return jsonify({"message": "Image reported and uploaded successfully"})
 
 
 def get_prediction_from_external_api(image_url):
