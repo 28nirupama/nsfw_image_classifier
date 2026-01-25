@@ -176,6 +176,7 @@ def report_prediction():
         image.save(buffer, format="JPEG")
         buffer.seek(0)  # Ensure the buffer is at the start
 
+        # Move the image to the correct reporting bucket based on the prediction
         if prediction == 'NSFW':
             upload_reported_image(buffer, filename, config.S3_BUCKET_NOTSAFE_REPORTED)
         elif prediction == 'SFW':
