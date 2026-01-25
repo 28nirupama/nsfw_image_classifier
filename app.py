@@ -58,11 +58,13 @@ def predict_url():
 
     if not image_url:
         return jsonify({"error": "No image URL provided"}), 400
+    if not image_url.startswith(('http://', 'https://')):
+        return jsonify({"error": "Invalid image URL. Please provide a valid URL with scheme (http:// or https://)."}), 400
 
     try:
         # Fetch image from URL
         response = requests.get(image_url, timeout=config.REQUEST_TIMEOUT)
-        response.raise_for_status()
+        response.raise_for_status()  # Raise an error if the URL is invalid
         image = Image.open(BytesIO(response.content)).convert("RGB")
 
         # Get prediction using the local model
@@ -153,15 +155,19 @@ def report_prediction():
     nsfw_confidence = data.get('nsfw_confidence')
     image_url = data.get('image_url')
 
+    # Ensure image_url is provided if the source is URL-based
+    if not image_url:
+        return jsonify({"error": "Image URL is required for reporting."}), 400
+
     logging.info(f"Reported Prediction - Prediction: {prediction}, Source: {source_type}, Image URL: {image_url}")
 
     # Fetch image from URL (or you can modify this if image is uploaded instead)
     try:
         response = requests.get(image_url, timeout=config.REQUEST_TIMEOUT)
-        response.raise_for_status()
+        response.raise_for_status()  # Ensure the image URL is valid
         image = Image.open(BytesIO(response.content)).convert("RGB")
 
-        # Define filename
+        # Define filename for the reported image
         filename = f"reported_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}.jpg"
 
         # Store the image in the appropriate reporting S3 bucket

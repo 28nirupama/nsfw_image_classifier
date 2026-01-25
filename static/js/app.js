@@ -105,7 +105,8 @@ async function predictUpload() {
         prediction: data.prediction,
         confidence: data.confidence,
         sfw_confidence: data.sfw_confidence,
-        nsfw_confidence: data.nsfw_confidence
+        nsfw_confidence: data.nsfw_confidence,
+        imageFile: fileInput.files[0]  // Store the uploaded file for reporting
     };
 
     resBox.innerHTML = `
@@ -133,8 +134,14 @@ async function reportPrediction() {
     formData.append("sfw_confidence", lastPrediction.sfw_confidence);
     formData.append("nsfw_confidence", lastPrediction.nsfw_confidence);
 
+    // If the source is URL-based
     if (lastPrediction.sourceType === "url") {
         formData.append("image_url", lastPrediction.imageUrl);
+    }
+
+    // If the source is an uploaded file
+    if (lastPrediction.sourceType === "upload") {
+        formData.append("image_file", lastPrediction.imageFile); // Send the image file
     }
 
     const res = await fetch(`${BASE_URL}/report-prediction`, {
