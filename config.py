@@ -40,7 +40,7 @@ class Config:
     REQUEST_TIMEOUT = int(os.getenv('REQUEST_TIMEOUT', 10))
 
     # S3 Upload flag: Controls whether image uploads to S3 are enabled or not
-    S3_UPLOAD_ENABLED = os.getenv('S3_UPLOAD_ENABLED', 'True') == 'True'  # Default to True if not set
+    S3_UPLOAD_ENABLED = os.getenv('S3_UPLOAD_ENABLED', 'True').lower() == 'true'  # Default to True if not set
 
     @classmethod
     def validate(cls):
@@ -67,4 +67,3 @@ class Config:
 
 # Singleton instance for easy access
 config = Config()
-
