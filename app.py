@@ -50,7 +50,7 @@ def measure_time(route_name):
 def home():
     return render_template("index.html")
 
-# Assuming you are sending image data to the prediction API
+# Function to get prediction from external API
 def get_prediction_from_api(image_data):
     api_url = config.PREDICTION_API_URL
     response = requests.post(api_url, data=image_data, timeout=config.REQUEST_TIMEOUT)
@@ -82,7 +82,7 @@ def predict_url():
             buffer = BytesIO()
             image.thumbnail((1024, 1024))  # Resize image before saving
             image.save(buffer, format="JPEG")
-            buffer.seek(0)  # Ensure the buffer is at the start
+            buffer.seek(0)  # Ensure the buffer is at the start before uploading
             upload_reported_image(buffer, filename, config.S3_BUCKET_ALL_IMAGES)  # Always store in allimages
 
             # Store the image in the appropriate S3 bucket based on prediction
@@ -127,7 +127,7 @@ def predict_upload():
             buffer = BytesIO()
             image.thumbnail((1024, 1024))  # Resize image before saving
             image.save(buffer, format="JPEG")
-            buffer.seek(0)  # Ensure the buffer is at the start
+            buffer.seek(0)  # Ensure the buffer is at the start before uploading
             upload_reported_image(buffer, filename, config.S3_BUCKET_ALL_IMAGES)  # Always store in allimages
 
             # Store the image in the appropriate S3 bucket based on prediction
