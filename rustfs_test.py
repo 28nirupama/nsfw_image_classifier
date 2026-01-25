@@ -2,7 +2,6 @@ import boto3
 from botocore.client import Config as BotoConfig
 from io import BytesIO
 from config import config
-import requests
 
 # Lazy initialization of S3 client
 _s3_client = None
@@ -48,10 +47,10 @@ def upload_reported_image(image_buffer, filename, bucket):
 
     try:
         print(f"Uploading image: {filename} to bucket: {bucket}")
-        # Ensure the image buffer is at the start before uploading
+        # Read content and create a fresh buffer to avoid corrupting the original
         image_buffer.seek(0)
         content = image_buffer.read()
-        upload_buffer = BytesIO(content)  # Creating a fresh buffer to upload
+        upload_buffer = BytesIO(content)
         s3.upload_fileobj(upload_buffer, bucket, filename)
         print(f"Image successfully uploaded to bucket: {bucket}")
         return True
@@ -59,11 +58,6 @@ def upload_reported_image(image_buffer, filename, bucket):
         print(f"Warning: S3 upload failed (non-fatal): {str(e)}")
         return False
 
-
-def get_prediction_from_api(image_data):
-    api_url = config.PREDICTION_API_URL
-    response = requests.post(api_url, data=image_data, timeout=config.REQUEST_TIMEOUT)
-    return response.json()
 
 # Bucket name constants from config
 ALL_IMAGES_BUCKET = config.S3_BUCKET_ALL_IMAGES

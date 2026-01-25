@@ -42,9 +42,6 @@ class Config:
     # S3 Upload flag: Controls whether image uploads to S3 are enabled or not
     S3_UPLOAD_ENABLED = os.getenv('S3_UPLOAD_ENABLED', 'True') == 'True'  # Default to True if not set
 
-    # Prediction API URL
-    PREDICTION_API_URL = os.getenv('PREDICTION_API_URL', 'https://nsfw-detection.todos.monster/predict')
-
     @classmethod
     def validate(cls):
         """Validate required configuration values."""
@@ -53,8 +50,6 @@ class Config:
             missing.append('AWS_ACCESS_KEY_ID')
         if not cls.AWS_SECRET_ACCESS_KEY:
             missing.append('AWS_SECRET_ACCESS_KEY')
-        if not cls.PREDICTION_API_URL:
-            missing.append('PREDICTION_API_URL')
 
         if missing:
             raise ValueError(f"Missing required environment variables: {', '.join(missing)}")
@@ -72,3 +67,4 @@ class Config:
 
 # Singleton instance for easy access
 config = Config()
+
