@@ -27,10 +27,13 @@ class Config:
     AWS_REGION = os.getenv('AWS_REGION', 'us-east-1')
 
     # S3 Bucket Names
+    # S3 Bucket Names (Add any missing ones here)
     S3_BUCKET_ALL_IMAGES = os.getenv('S3_BUCKET_ALL_IMAGES', 'allimages')
     S3_BUCKET_NSFW_REPORTED = os.getenv('S3_BUCKET_NSFW_REPORTED', 'nsfwreported')
     S3_BUCKET_SFW_REPORTED = os.getenv('S3_BUCKET_SFW_REPORTED', 'sfwreported')
+    S3_BUCKET_NOTSAFE_REPORTED = os.getenv('S3_BUCKET_NOTSAFE_REPORTED', 'notsafereported')
     S3_BUCKET_SAFE_REPORTED = os.getenv('S3_BUCKET_SAFE_REPORTED', 'safereported')
+
 
     # Model settings
     MODEL_PATH = os.getenv('MODEL_PATH', 'resnet50_nsfw_finetuned.pt')

@@ -38,7 +38,7 @@ def _get_s3_client():
 
 
 def upload_reported_image(image_buffer, filename, bucket):
-    """Upload an image to the specified S3 bucket. Fails gracefully if S3 is not configured."""
+    """Upload an image to the specified S3 bucket."""
     s3 = _get_s3_client()
 
     if s3 is None:
@@ -57,6 +57,7 @@ def upload_reported_image(image_buffer, filename, bucket):
     except Exception as e:
         print(f"Warning: S3 upload failed (non-fatal): {str(e)}")
         return False
+
 
 
 # Bucket name constants from config

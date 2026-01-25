@@ -256,3 +256,19 @@
 2026-01-25 12:56:33,489 | INFO | 192.168.43.224 - - [25/Jan/2026 12:56:33] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
 2026-01-25 12:56:49,081 | INFO | PREDICT_UPLOAD | 513.43 ms
 2026-01-25 12:56:49,082 | INFO | 192.168.43.224 - - [25/Jan/2026 12:56:49] "POST /predict-upload HTTP/1.1" 200 -
+2026-01-25 22:31:07,513 | INFO | [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.30.6:5000
+2026-01-25 22:31:07,515 | INFO | [33mPress CTRL+C to quit[0m
+2026-01-25 22:31:07,550 | INFO |  * Restarting with watchdog (windowsapi)
+2026-01-25 22:31:16,096 | WARNING |  * Debugger is active!
+2026-01-25 22:31:16,112 | INFO |  * Debugger PIN: 140-479-292
+2026-01-25 22:31:16,218 | INFO | 127.0.0.1 - - [25/Jan/2026 22:31:16] "GET / HTTP/1.1" 200 -
+2026-01-25 22:31:16,487 | INFO | 127.0.0.1 - - [25/Jan/2026 22:31:16] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-01-25 22:31:16,518 | INFO | 127.0.0.1 - - [25/Jan/2026 22:31:16] "GET /static/js/app.js HTTP/1.1" 200 -
+2026-01-25 22:31:16,531 | INFO | 127.0.0.1 - - [25/Jan/2026 22:31:16] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2026-01-25 22:31:43,276 | INFO | PREDICT_UPLOAD | 18385.61 ms
+2026-01-25 22:31:43,278 | INFO | 127.0.0.1 - - [25/Jan/2026 22:31:43] "POST /predict-upload HTTP/1.1" 200 -
+2026-01-25 23:20:46,694 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\flask\\__init__.py', reloading
+2026-01-25 23:20:47,662 | INFO |  * Restarting with watchdog (windowsapi)
