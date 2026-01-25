@@ -351,3 +351,26 @@
 2026-01-26 01:07:12,216 | INFO | PREDICT_UPLOAD | 25534.34 ms
 2026-01-26 01:07:12,216 | INFO | 192.168.43.224 - - [26/Jan/2026 01:07:12] "POST /predict-upload HTTP/1.1" 200 -
 2026-01-26 01:07:17,178 | INFO | 192.168.43.224 - - [26/Jan/2026 01:07:17] "[31m[1mPOST /report-prediction HTTP/1.1[0m" 400 -
+2026-01-26 01:19:38,888 | INFO | [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.43.224:5000
+2026-01-26 01:19:38,889 | INFO | [33mPress CTRL+C to quit[0m
+2026-01-26 01:19:38,913 | INFO |  * Restarting with watchdog (windowsapi)
+2026-01-26 01:19:45,563 | WARNING |  * Debugger is active!
+2026-01-26 01:19:45,570 | INFO |  * Debugger PIN: 140-479-292
+2026-01-26 01:20:11,458 | INFO | 192.168.43.224 - - [26/Jan/2026 01:20:11] "GET / HTTP/1.1" 200 -
+2026-01-26 01:20:11,567 | INFO | 192.168.43.224 - - [26/Jan/2026 01:20:11] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-01-26 01:20:11,575 | INFO | 192.168.43.224 - - [26/Jan/2026 01:20:11] "GET /static/js/app.js HTTP/1.1" 200 -
+2026-01-26 01:20:32,480 | INFO | PREDICT_UPLOAD | 10023.70 ms
+2026-01-26 01:20:32,481 | INFO | 192.168.43.224 - - [26/Jan/2026 01:20:32] "POST /predict-upload HTTP/1.1" 200 -
+2026-01-26 01:20:36,685 | INFO | 192.168.43.224 - - [26/Jan/2026 01:20:36] "[31m[1mPOST /report-prediction HTTP/1.1[0m" 400 -
+2026-01-26 01:28:15,826 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\Desktop\\nsfw_model\\app.py', reloading
+2026-01-26 01:28:15,827 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\Desktop\\nsfw_model\\app.py', reloading
+2026-01-26 01:28:15,828 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\Desktop\\nsfw_model\\app.py', reloading
+2026-01-26 01:28:17,710 | INFO |  * Restarting with watchdog (windowsapi)
+2026-01-26 01:28:24,864 | WARNING |  * Debugger is active!
+2026-01-26 01:28:24,871 | INFO |  * Debugger PIN: 140-479-292
+2026-01-26 01:29:01,576 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\Desktop\\nsfw_model\\app.py', reloading
+2026-01-26 01:29:01,591 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\Desktop\\nsfw_model\\app.py', reloading
+2026-01-26 01:29:01,592 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\Desktop\\nsfw_model\\app.py', reloading

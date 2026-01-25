@@ -154,39 +154,42 @@ def report_prediction():
     sfw_confidence = data.get('sfw_confidence')
     nsfw_confidence = data.get('nsfw_confidence')
     image_url = data.get('image_url')
+    image_file = request.files.get('image_file')
 
-    # Ensure image_url is provided if the source is URL-based
-    if not image_url:
-        return jsonify({"error": "Image URL is required for reporting."}), 400
+    # Ensure image_url or image_file is provided for reporting
+    if not image_url and not image_file:
+        return jsonify({"error": "Either image URL or image file is required for reporting."}), 400
 
     logging.info(f"Reported Prediction - Prediction: {prediction}, Source: {source_type}, Image URL: {image_url}")
 
-    # Fetch image from URL (or you can modify this if image is uploaded instead)
-    try:
-        response = requests.get(image_url, timeout=config.REQUEST_TIMEOUT)
-        response.raise_for_status()  # Ensure the image URL is valid
-        image = Image.open(BytesIO(response.content)).convert("RGB")
+    # If the source is URL-based, fetch the image from the URL
+    if image_url:
+        try:
+            response = requests.get(image_url, timeout=config.REQUEST_TIMEOUT)
+            response.raise_for_status()  # Ensure the image URL is valid
+            image = Image.open(BytesIO(response.content)).convert("RGB")
+        except requests.exceptions.RequestException as e:
+            logging.error(f"Failed to fetch image from URL: {str(e)}")
+            return jsonify({"error": f"Failed to fetch image from URL: {str(e)}"}), 400
+    # If the source is file-based, use the uploaded file
+    elif image_file:
+        image = Image.open(image_file).convert("RGB")
 
-        # Define filename for the reported image
-        filename = f"reported_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}.jpg"
+    # Define filename for the reported image
+    filename = f"reported_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}.jpg"
 
-        # Store the image in the appropriate reporting S3 bucket
-        buffer = BytesIO()
-        image.thumbnail((1024, 1024))  # Resize image before saving
-        image.save(buffer, format="JPEG")
-        buffer.seek(0)  # Ensure the buffer is at the start
+    # Store the image in the appropriate reporting S3 bucket
+    buffer = BytesIO()
+    image.thumbnail((1024, 1024))  # Resize image before saving
+    image.save(buffer, format="JPEG")
+    buffer.seek(0)  # Ensure the buffer is at the start
 
-        # Move the image to the correct reporting bucket based on the prediction
-        if prediction == 'NSFW':
-            upload_reported_image(buffer, filename, config.S3_BUCKET_NOTSAFE_REPORTED)
-        elif prediction == 'SFW':
-            upload_reported_image(buffer, filename, config.S3_BUCKET_SAFE_REPORTED)
+    if prediction == 'NSFW':
+        upload_reported_image(buffer, filename, config.S3_BUCKET_NOTSAFE_REPORTED)
+    elif prediction == 'SFW':
+        upload_reported_image(buffer, filename, config.S3_BUCKET_SAFE_REPORTED)
 
-        return jsonify({"message": "Prediction reported successfully!"}), 200
-
-    except requests.exceptions.RequestException as e:
-        logging.error(f"Failed to fetch image from URL: {str(e)}")
-        return jsonify({"error": f"Failed to fetch image from URL: {str(e)}"}), 400
+    return jsonify({"message": "Prediction reported successfully!"}), 200
 
 
 if __name__ == "__main__":
