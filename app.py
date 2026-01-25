@@ -50,6 +50,12 @@ def measure_time(route_name):
 def home():
     return render_template("index.html")
 
+# Assuming you are sending image data to the prediction API
+def get_prediction_from_api(image_data):
+    api_url = config.PREDICTION_API_URL
+    response = requests.post(api_url, data=image_data, timeout=config.REQUEST_TIMEOUT)
+    return response.json()
+
 @app.route('/predict-url', methods=['POST'])
 @measure_time("PREDICT_URL")
 def predict_url():
@@ -65,8 +71,8 @@ def predict_url():
         response.raise_for_status()
         image = Image.open(BytesIO(response.content)).convert("RGB")
 
-        # Get prediction using the local model
-        prediction_result = predict_pil_image(image, threshold=config.NSFW_THRESHOLD)
+        # Get prediction using the external prediction API
+        prediction_result = get_prediction_from_api(image)
 
         # Define filename
         filename = f"{prediction_result['prediction']}_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}.jpg"
@@ -111,7 +117,7 @@ def predict_upload():
     try:
         # Process the uploaded image file
         image = Image.open(file).convert("RGB")
-        prediction_result = predict_pil_image(image, threshold=config.NSFW_THRESHOLD)
+        prediction_result = get_prediction_from_api(image)
 
         # Define filename
         filename = f"{prediction_result['prediction']}_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}.jpg"

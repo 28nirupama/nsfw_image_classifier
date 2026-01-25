@@ -2,6 +2,7 @@ import boto3
 from botocore.client import Config as BotoConfig
 from io import BytesIO
 from config import config
+import requests
 
 # Lazy initialization of S3 client
 _s3_client = None
@@ -58,6 +59,11 @@ def upload_reported_image(image_buffer, filename, bucket):
         print(f"Warning: S3 upload failed (non-fatal): {str(e)}")
         return False
 
+
+def get_prediction_from_api(image_data):
+    api_url = config.PREDICTION_API_URL
+    response = requests.post(api_url, data=image_data, timeout=config.REQUEST_TIMEOUT)
+    return response.json()
 
 # Bucket name constants from config
 ALL_IMAGES_BUCKET = config.S3_BUCKET_ALL_IMAGES

@@ -158,3 +158,35 @@
 2026-01-25 00:28:29,607 | ERROR | Error during prediction: 'Config' object has no attribute 'S3_UPLOAD_ENABLED'
 2026-01-25 00:28:29,608 | INFO | PREDICT_UPLOAD | 345.41 ms
 2026-01-25 00:28:29,609 | INFO | 127.0.0.1 - - [25/Jan/2026 00:28:29] "[35m[1mPOST /predict-upload HTTP/1.1[0m" 500 -
+2026-01-25 00:34:22,405 | INFO | [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.43.224:5000
+2026-01-25 00:34:22,406 | INFO | [33mPress CTRL+C to quit[0m
+2026-01-25 00:34:22,434 | INFO |  * Restarting with watchdog (windowsapi)
+2026-01-25 00:34:32,062 | WARNING |  * Debugger is active!
+2026-01-25 00:34:32,068 | INFO |  * Debugger PIN: 140-479-292
+2026-01-25 00:34:36,663 | INFO | 127.0.0.1 - - [25/Jan/2026 00:34:36] "GET / HTTP/1.1" 200 -
+2026-01-25 00:34:36,787 | INFO | 127.0.0.1 - - [25/Jan/2026 00:34:36] "[36mGET /static/js/app.js HTTP/1.1[0m" 304 -
+2026-01-25 00:34:36,788 | INFO | 127.0.0.1 - - [25/Jan/2026 00:34:36] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-01-25 00:34:59,670 | INFO | PREDICT_UPLOAD | 17023.34 ms
+2026-01-25 00:34:59,670 | INFO | 127.0.0.1 - - [25/Jan/2026 00:34:59] "POST /predict-upload HTTP/1.1" 200 -
+2026-01-25 00:35:32,196 | INFO | PREDICT_UPLOAD | 21327.92 ms
+2026-01-25 00:35:32,197 | INFO | 127.0.0.1 - - [25/Jan/2026 00:35:32] "POST /predict-upload HTTP/1.1" 200 -
+2026-01-25 00:36:17,926 | INFO | PREDICT_UPLOAD | 7277.00 ms
+2026-01-25 00:36:17,927 | INFO | 127.0.0.1 - - [25/Jan/2026 00:36:17] "POST /predict-upload HTTP/1.1" 200 -
+2026-01-25 00:36:20,384 | INFO | Reported Prediction - Prediction: NSFW, Source: upload, Image URL: None
+2026-01-25 00:36:20,385 | INFO | 127.0.0.1 - - [25/Jan/2026 00:36:20] "POST /report-prediction HTTP/1.1" 200 -
+2026-01-25 00:36:46,292 | INFO | PREDICT_UPLOAD | 10812.61 ms
+2026-01-25 00:36:46,293 | INFO | 127.0.0.1 - - [25/Jan/2026 00:36:46] "POST /predict-upload HTTP/1.1" 200 -
+2026-01-25 00:36:50,195 | INFO | Reported Prediction - Prediction: NSFW, Source: upload, Image URL: None
+2026-01-25 00:36:50,196 | INFO | 127.0.0.1 - - [25/Jan/2026 00:36:50] "POST /report-prediction HTTP/1.1" 200 -
+2026-01-25 00:38:56,683 | INFO | PREDICT_UPLOAD | 2991.88 ms
+2026-01-25 00:38:56,684 | INFO | 127.0.0.1 - - [25/Jan/2026 00:38:56] "POST /predict-upload HTTP/1.1" 200 -
+2026-01-25 00:38:59,879 | INFO | Reported Prediction - Prediction: NSFW, Source: upload, Image URL: None
+2026-01-25 00:38:59,881 | INFO | 127.0.0.1 - - [25/Jan/2026 00:38:59] "POST /report-prediction HTTP/1.1" 200 -
+2026-01-25 00:44:50,053 | INFO | [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.43.224:5000
+2026-01-25 00:44:50,054 | INFO | [33mPress CTRL+C to quit[0m
