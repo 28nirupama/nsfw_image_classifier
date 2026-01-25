@@ -81,8 +81,8 @@ def predict_url():
         if config.S3_UPLOAD_ENABLED:
             buffer = BytesIO()
             image.thumbnail((1024, 1024))  # Resize image before saving
-            image.save(buffer, format="JPEG")
-            buffer.seek(0)  # Ensure the buffer is at the start before uploading
+            image.save(buffer, format="JPEG")  # Save image to buffer
+            buffer.seek(0)  # Correctly use seek on the buffer (not the image)
             upload_reported_image(buffer, filename, config.S3_BUCKET_ALL_IMAGES)  # Always store in allimages
 
             # Store the image in the appropriate S3 bucket based on prediction
@@ -126,7 +126,7 @@ def predict_upload():
         if config.S3_UPLOAD_ENABLED:
             buffer = BytesIO()
             image.thumbnail((1024, 1024))  # Resize image before saving
-            image.save(buffer, format="JPEG")
+            image.save(buffer, format="JPEG")  # Save image to buffer
             buffer.seek(0)  # Ensure the buffer is at the start before uploading
             upload_reported_image(buffer, filename, config.S3_BUCKET_ALL_IMAGES)  # Always store in allimages
 

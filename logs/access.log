@@ -224,3 +224,14 @@
 2026-01-25 12:36:37,713 | ERROR | Error during prediction: Image.seek() takes 2 positional arguments but 3 were given
 2026-01-25 12:36:37,715 | INFO | PREDICT_UPLOAD | 73.03 ms
 2026-01-25 12:36:37,715 | INFO | 192.168.43.224 - - [25/Jan/2026 12:36:37] "[35m[1mPOST /predict-upload HTTP/1.1[0m" 500 -
+2026-01-25 12:40:16,050 | INFO | [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.43.224:5000
+2026-01-25 12:40:16,051 | INFO | [33mPress CTRL+C to quit[0m
+2026-01-25 12:40:21,121 | INFO | 192.168.43.224 - - [25/Jan/2026 12:40:21] "GET / HTTP/1.1" 200 -
+2026-01-25 12:40:21,205 | INFO | 192.168.43.224 - - [25/Jan/2026 12:40:21] "[36mGET /static/js/app.js HTTP/1.1[0m" 304 -
+2026-01-25 12:40:21,206 | INFO | 192.168.43.224 - - [25/Jan/2026 12:40:21] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-01-25 12:40:31,136 | ERROR | Error during prediction: Image.seek() takes 2 positional arguments but 3 were given
+2026-01-25 12:40:31,137 | INFO | PREDICT_UPLOAD | 36.47 ms
+2026-01-25 12:40:31,138 | INFO | 192.168.43.224 - - [25/Jan/2026 12:40:31] "[35m[1mPOST /predict-upload HTTP/1.1[0m" 500 -
