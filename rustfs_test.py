@@ -48,10 +48,10 @@ def upload_reported_image(image_buffer, filename, bucket):
 
     try:
         print(f"Uploading image: {filename} to bucket: {bucket}")
-        # Read content and create a fresh buffer to avoid corrupting the original
+        # Ensure the image buffer is at the start before uploading
         image_buffer.seek(0)
         content = image_buffer.read()
-        upload_buffer = BytesIO(content)
+        upload_buffer = BytesIO(content)  # Creating a fresh buffer to upload
         s3.upload_fileobj(upload_buffer, bucket, filename)
         print(f"Image successfully uploaded to bucket: {bucket}")
         return True
