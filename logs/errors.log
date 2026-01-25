@@ -272,3 +272,34 @@
 2026-01-25 22:31:43,278 | INFO | 127.0.0.1 - - [25/Jan/2026 22:31:43] "POST /predict-upload HTTP/1.1" 200 -
 2026-01-25 23:20:46,694 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\flask\\__init__.py', reloading
 2026-01-25 23:20:47,662 | INFO |  * Restarting with watchdog (windowsapi)
+2026-01-26 00:15:20,763 | INFO | [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.35.173.224:5000
+2026-01-26 00:15:20,764 | INFO | [33mPress CTRL+C to quit[0m
+2026-01-26 00:15:20,787 | INFO |  * Restarting with watchdog (windowsapi)
+2026-01-26 00:15:25,774 | WARNING |  * Debugger is active!
+2026-01-26 00:15:25,778 | INFO |  * Debugger PIN: 140-479-292
+2026-01-26 00:15:27,083 | INFO | 10.35.173.224 - - [26/Jan/2026 00:15:27] "GET / HTTP/1.1" 200 -
+2026-01-26 00:15:27,157 | INFO | 10.35.173.224 - - [26/Jan/2026 00:15:27] "GET /static/js/app.js HTTP/1.1" 200 -
+2026-01-26 00:15:27,170 | INFO | 10.35.173.224 - - [26/Jan/2026 00:15:27] "GET /static/css/style.css HTTP/1.1" 200 -
+2026-01-26 00:15:27,240 | INFO | 10.35.173.224 - - [26/Jan/2026 00:15:27] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2026-01-26 00:21:34,362 | INFO | PREDICT_UPLOAD | 323008.65 ms
+2026-01-26 00:21:34,362 | INFO | 10.35.173.224 - - [26/Jan/2026 00:21:34] "POST /predict-upload HTTP/1.1" 200 -
+2026-01-26 00:23:40,263 | INFO | [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.35.173.224:5000
+2026-01-26 00:23:40,264 | INFO | [33mPress CTRL+C to quit[0m
+2026-01-26 00:23:40,280 | INFO |  * Restarting with watchdog (windowsapi)
+2026-01-26 00:23:45,507 | WARNING |  * Debugger is active!
+2026-01-26 00:23:45,513 | INFO |  * Debugger PIN: 140-479-292
+2026-01-26 00:24:03,959 | INFO | 10.35.173.224 - - [26/Jan/2026 00:24:03] "GET / HTTP/1.1" 200 -
+2026-01-26 00:24:04,065 | INFO | 10.35.173.224 - - [26/Jan/2026 00:24:04] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-01-26 00:24:04,066 | INFO | 10.35.173.224 - - [26/Jan/2026 00:24:04] "[36mGET /static/js/app.js HTTP/1.1[0m" 304 -
+2026-01-26 00:34:47,492 | INFO | PREDICT_UPLOAD | 629232.82 ms
+2026-01-26 00:34:47,494 | INFO | 10.35.173.224 - - [26/Jan/2026 00:34:47] "POST /predict-upload HTTP/1.1" 200 -
+2026-01-26 00:36:54,479 | INFO | PREDICT_UPLOAD | 632494.26 ms
+2026-01-26 00:36:54,480 | INFO | 10.35.173.224 - - [26/Jan/2026 00:36:54] "POST /predict-upload HTTP/1.1" 200 -
+2026-01-26 00:40:18,551 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\flask\\__init__.py', reloading
+2026-01-26 00:40:18,557 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\flask\\app.py', reloading
