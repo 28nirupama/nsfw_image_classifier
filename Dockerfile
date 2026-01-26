@@ -5,11 +5,14 @@ FROM python:3.10-slim AS build
 WORKDIR /app
 
 # Copy the requirements file into the container
-COPY requirements.txt .
+COPY requirements.txt .  
 
 # Install Python dependencies (including Gunicorn) with no cache
 RUN pip install --upgrade pip \
     && pip install --no-cache-dir -r requirements.txt
+
+# Debugging step: check installed packages
+RUN pip freeze  # This will list all installed packages
 
 # Stage 2: Final image with minimal footprint
 FROM python:3.10-slim AS base  
@@ -21,13 +24,13 @@ WORKDIR /app
 COPY --from=build /app /app
 
 # Copy the rest of the project files into the container
-COPY . .
+COPY . .  
 
 # Expose the port Flask will run on
-EXPOSE 5000
+EXPOSE 5000  
 
 # Set environment variable for production
-ENV FLASK_ENV=production
+ENV FLASK_ENV=production  
 
 # Install Gunicorn (if it's not part of requirements.txt)
 RUN pip install gunicorn
