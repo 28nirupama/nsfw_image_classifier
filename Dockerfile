@@ -23,7 +23,9 @@ RUN pip install --upgrade pip \
     && pip install --no-cache-dir -r requirements.txt
 
 # Copy the .env file into the container
-COPY .env .env
+# Copy the .env file into the container (use full path if necessary)
+COPY ./.env ./.env
+
 
 # Copy app code
 COPY . .
