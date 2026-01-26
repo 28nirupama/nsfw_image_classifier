@@ -1,39 +1,30 @@
-# Stage 1: Build dependencies
-FROM python:3.10-slim AS build  
+FROM python:3.10-slim
 
-# Set the working directory inside the container
 WORKDIR /app
 
-# Copy the requirements file into the container
-COPY requirements.txt .  
+ENV FLASK_ENV=production
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
 
-# Install Python dependencies (including Gunicorn) with no cache
+# REQUIRED system dependencies for torch + torchvision
+RUN apt-get update && apt-get install -y \
+    gcc \
+    g++ \
+    libstdc++6 \
+    libgl1 \
+    libglib2.0-0 \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy requirements first
+COPY requirements.txt .
+
+# Upgrade pip & install deps
 RUN pip install --upgrade pip \
     && pip install --no-cache-dir -r requirements.txt
 
-# Debugging step: check installed packages
-RUN pip freeze  # This will list all installed packages
+# Copy app code
+COPY . .
 
-# Stage 2: Final image with minimal footprint
-FROM python:3.10-slim AS base  
+EXPOSE 5000
 
-# Set the working directory inside the container
-WORKDIR /app
-
-# Copy only the necessary files (installed dependencies)
-COPY --from=build /app /app
-
-# Copy the rest of the project files into the container
-COPY . .  
-
-# Expose the port Flask will run on
-EXPOSE 5000  
-
-# Set environment variable for production
-ENV FLASK_ENV=production  
-
-# Install Gunicorn (if it's not part of requirements.txt)
-RUN pip install gunicorn
-
-# Set the default command to run the app using Gunicorn
-CMD ["gunicorn", "--bind", "0.0.0.0:5000", "--workers", "4", "--access-logfile", "-", "app:app"]
+CMD ["gunicorn", "-b", "0.0.0.0:5000", "-w", "4", "app:app"]
