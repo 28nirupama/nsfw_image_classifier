@@ -45,7 +45,7 @@ class Config:
     # Feature flags
     # ----------------------------
     # Controls whether images should be uploaded to S3 or skipped
-    S3_UPLOAD_ENABLED = os.getenv('S3_UPLOAD_ENABLED', 'True').lower() in ('true', '1', 'yes')
+    S3_UPLOAD_ENABLED = os.getenv('S3_UPLOAD_ENABLED', 'true').lower() in ('true', '1', 'yes')
 
     @classmethod
     def validate(cls):

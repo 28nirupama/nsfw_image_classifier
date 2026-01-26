@@ -600,3 +600,40 @@
 2026-01-26 22:27:50,136 | INFO |  * Restarting with watchdog (windowsapi)
 2026-01-26 22:27:55,171 | WARNING |  * Debugger is active!
 2026-01-26 22:27:55,174 | INFO |  * Debugger PIN: 140-479-292
+2026-01-26 23:48:30,249 | INFO | [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.43.224:5000
+2026-01-26 23:48:30,251 | INFO | [33mPress CTRL+C to quit[0m
+2026-01-26 23:48:30,281 | INFO |  * Restarting with watchdog (windowsapi)
+2026-01-26 23:48:35,167 | WARNING |  * Debugger is active!
+2026-01-26 23:48:35,187 | INFO |  * Debugger PIN: 140-479-292
+2026-01-26 23:48:54,404 | INFO | 127.0.0.1 - - [26/Jan/2026 23:48:54] "GET / HTTP/1.1" 200 -
+2026-01-26 23:48:54,539 | INFO | 127.0.0.1 - - [26/Jan/2026 23:48:54] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-01-26 23:48:54,543 | INFO | 127.0.0.1 - - [26/Jan/2026 23:48:54] "[36mGET /static/js/app.js HTTP/1.1[0m" 304 -
+2026-01-26 23:54:56,510 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\Desktop\\nsfw_model\\config.py', reloading
+2026-01-26 23:54:56,528 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\Desktop\\nsfw_model\\config.py', reloading
+2026-01-26 23:54:56,529 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\Desktop\\nsfw_model\\config.py', reloading
+2026-01-26 23:54:57,822 | INFO |  * Restarting with watchdog (windowsapi)
+2026-01-26 23:55:02,921 | WARNING |  * Debugger is active!
+2026-01-26 23:55:02,924 | INFO |  * Debugger PIN: 140-479-292
+2026-01-26 23:59:12,247 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\Desktop\\nsfw_model\\config.py', reloading
+2026-01-26 23:59:12,249 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\Desktop\\nsfw_model\\config.py', reloading
+2026-01-26 23:59:14,033 | INFO |  * Restarting with watchdog (windowsapi)
+2026-01-26 23:59:19,193 | WARNING |  * Debugger is active!
+2026-01-26 23:59:19,205 | INFO |  * Debugger PIN: 140-479-292
+2026-01-27 00:14:51,433 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\Desktop\\nsfw_model\\config.py', reloading
+2026-01-27 00:14:51,434 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\Desktop\\nsfw_model\\config.py', reloading
+2026-01-27 00:14:51,434 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\Desktop\\nsfw_model\\config.py', reloading
+2026-01-27 00:14:53,062 | INFO |  * Restarting with watchdog (windowsapi)
+2026-01-27 00:14:57,647 | WARNING |  * Debugger is active!
+2026-01-27 00:14:57,652 | INFO |  * Debugger PIN: 140-479-292
+2026-01-27 00:24:33,177 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\Desktop\\nsfw_model\\config.py', reloading
+2026-01-27 00:24:33,192 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\Desktop\\nsfw_model\\config.py', reloading
+2026-01-27 00:24:33,194 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\Desktop\\nsfw_model\\config.py', reloading
+2026-01-27 00:24:35,176 | INFO |  * Restarting with watchdog (windowsapi)
+2026-01-27 00:24:40,019 | WARNING |  * Debugger is active!
+2026-01-27 00:24:40,022 | INFO |  * Debugger PIN: 140-479-292
+2026-01-27 00:24:42,292 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\Desktop\\nsfw_model\\config.py', reloading
+2026-01-27 00:24:42,305 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\Desktop\\nsfw_model\\config.py', reloading
+2026-01-27 00:24:42,306 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\Desktop\\nsfw_model\\config.py', reloading
