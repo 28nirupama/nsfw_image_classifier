@@ -454,3 +454,18 @@
 2026-01-26 12:40:50,921 | INFO | 192.168.43.224 - - [26/Jan/2026 12:40:50] "POST /predict-url HTTP/1.1" 200 -
 2026-01-26 12:41:04,500 | INFO | Reported Prediction - Prediction: NSFW, Source: url, Image URL: https://th.bing.com/th/id/OIP.5hxGMv76FAjn1U_zZUj3DQHaF7?o=7rm=3&rs=1&pid=ImgDetMain&o=7&rm=3
 2026-01-26 12:41:14,134 | INFO | 192.168.43.224 - - [26/Jan/2026 12:41:14] "POST /report-prediction HTTP/1.1" 200 -
+2026-01-26 20:59:50,852 | INFO | [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.43.224:5000
+2026-01-26 20:59:50,853 | INFO | [33mPress CTRL+C to quit[0m
+2026-01-26 20:59:50,878 | INFO |  * Restarting with watchdog (windowsapi)
+2026-01-26 20:59:56,358 | WARNING |  * Debugger is active!
+2026-01-26 20:59:56,376 | INFO |  * Debugger PIN: 140-479-292
+2026-01-26 21:00:07,240 | INFO | 127.0.0.1 - - [26/Jan/2026 21:00:07] "GET / HTTP/1.1" 200 -
+2026-01-26 21:00:07,365 | INFO | 127.0.0.1 - - [26/Jan/2026 21:00:07] "GET /static/css/style.css HTTP/1.1" 200 -
+2026-01-26 21:00:07,398 | INFO | 127.0.0.1 - - [26/Jan/2026 21:00:07] "GET /static/js/app.js HTTP/1.1" 200 -
+2026-01-26 21:00:27,887 | INFO | PREDICT_UPLOAD | 6133.45 ms
+2026-01-26 21:00:27,887 | INFO | 127.0.0.1 - - [26/Jan/2026 21:00:27] "POST /predict-upload HTTP/1.1" 200 -
+2026-01-26 21:01:10,965 | INFO | Reported Prediction - Prediction: NSFW, Source: upload, Image URL: None
+2026-01-26 21:01:12,833 | INFO | 127.0.0.1 - - [26/Jan/2026 21:01:12] "POST /report-prediction HTTP/1.1" 200 -

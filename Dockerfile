@@ -6,25 +6,25 @@ ENV FLASK_ENV=production
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
-# REQUIRED system dependencies for torch + torchvision
+# Install system dependencies for torch + torchvision
 RUN apt-get update && apt-get install -y \
     gcc \
     g++ \
     libstdc++6 \
     libgl1 \
     libglib2.0-0 \
-    && rm -rf /var/lib/apt/lists/*
+    libjpeg-dev \  # Added for image processing && rm -rf /var/lib/apt/lists/*
 
-# Copy requirements first
-COPY requirements.txt .
+# Copy requirements file and install dependencies
+COPY requirements.txt ./
 
-# Upgrade pip & install deps
-RUN pip install --upgrade pip \
-    && pip install --no-cache-dir -r requirements.txt
+RUN pip install --upgrade pip && pip install --no-cache-dir -r requirements.txt
 
-# Copy app code
-COPY . .
+# Copy the application code and model file into the app directory
+COPY . /app
 
+# Expose the port that Flask uses
 EXPOSE 5000
 
-CMD ["gunicorn", "-b", "0.0.0.0:5000", "-w", "4", "app:app"]
+# Run Gunicorn to serve the Flask app
+CMD ["gunicorn", "-b", "0.0.0.0:5000", "-w", "4", "--access-logfile", "-", "--error-logfile", "-", "app:app"]

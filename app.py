@@ -195,4 +195,5 @@ def report_prediction():
 if __name__ == "__main__":
     print(f"Starting server in {config.FLASK_ENV} mode...")
     print(f"Debug mode: {config.DEBUG}")
-    app.run(host=config.HOST, port=config.PORT, debug=config.DEBUG)
+    app.run(host="0.0.0.0", port=config.PORT, debug=config.DEBUG)
+
