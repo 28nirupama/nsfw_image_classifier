@@ -24,7 +24,9 @@ RUN pip install --upgrade pip \
 
 # Copy the .env file into the container
 # Copy the .env file into the container (use full path if necessary)
-COPY ./.env ./.env
+# Explicitly copy the .env file into the container's working directory
+COPY .env .env
+
 
 
 # Copy app code
