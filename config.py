@@ -48,9 +48,6 @@ class Config:
     # Controls whether images should be uploaded to S3 or skipped
     S3_UPLOAD_ENABLED = os.getenv('S3_UPLOAD_ENABLED', 'True').lower() in ('true', '1', 'yes')
 
-    # ----------------------------
-    # Utility methods
-    # ----------------------------
     @classmethod
     def validate(cls):
         """Validate required configuration values."""
@@ -62,6 +59,8 @@ class Config:
 
         if missing:
             raise ValueError(f"Missing required environment variables: {', '.join(missing)}")
+        print(f"S3_UPLOAD_ENABLED: {cls.S3_UPLOAD_ENABLED}")  
+        
 
     @classmethod
     def is_development(cls):
