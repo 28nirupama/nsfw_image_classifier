@@ -469,3 +469,134 @@
 2026-01-26 21:00:27,887 | INFO | 127.0.0.1 - - [26/Jan/2026 21:00:27] "POST /predict-upload HTTP/1.1" 200 -
 2026-01-26 21:01:10,965 | INFO | Reported Prediction - Prediction: NSFW, Source: upload, Image URL: None
 2026-01-26 21:01:12,833 | INFO | 127.0.0.1 - - [26/Jan/2026 21:01:12] "POST /report-prediction HTTP/1.1" 200 -
+2026-01-26 22:12:45,871 | INFO | [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.43.224:5000
+2026-01-26 22:12:45,871 | INFO | [33mPress CTRL+C to quit[0m
+2026-01-26 22:12:45,885 | INFO |  * Restarting with watchdog (windowsapi)
+2026-01-26 22:12:50,760 | WARNING |  * Debugger is active!
+2026-01-26 22:12:50,763 | INFO |  * Debugger PIN: 140-479-292
+2026-01-26 22:13:12,458 | INFO | 127.0.0.1 - - [26/Jan/2026 22:13:12] "GET / HTTP/1.1" 200 -
+2026-01-26 22:13:12,580 | INFO | 127.0.0.1 - - [26/Jan/2026 22:13:12] "GET /static/css/style.css HTTP/1.1" 200 -
+2026-01-26 22:13:12,581 | INFO | 127.0.0.1 - - [26/Jan/2026 22:13:12] "GET /static/js/app.js HTTP/1.1" 200 -
+2026-01-26 22:13:55,032 | INFO | PREDICT_UPLOAD | 29069.06 ms
+2026-01-26 22:13:55,033 | INFO | 127.0.0.1 - - [26/Jan/2026 22:13:55] "POST /predict-upload HTTP/1.1" 200 -
+2026-01-26 22:13:59,878 | INFO | Reported Prediction - Prediction: NSFW, Source: upload, Image URL: None
+2026-01-26 22:14:11,077 | INFO | 127.0.0.1 - - [26/Jan/2026 22:14:11] "POST /report-prediction HTTP/1.1" 200 -
+2026-01-26 22:27:49,107 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\flask\\__init__.py', reloading
+2026-01-26 22:27:49,108 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\PIL\\__init__.py', reloading
+2026-01-26 22:27:49,108 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\PIL\\Image.py', reloading
+2026-01-26 22:27:49,133 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\flask\\json\\__init__.py', reloading
+2026-01-26 22:27:49,133 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\flask\\app.py', reloading
+2026-01-26 22:27:49,134 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\flask\\globals.py', reloading
+2026-01-26 22:27:49,135 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\flask\\wrappers.py', reloading
+2026-01-26 22:27:49,135 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\werkzeug\\datastructures\\__init__.py', reloading
+2026-01-26 22:27:49,135 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\werkzeug\\wrappers\\__init__.py', reloading
+2026-01-26 22:27:49,136 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\flask\\typing.py', reloading
+2026-01-26 22:27:49,137 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\flask\\sansio\\app.py', reloading
+2026-01-26 22:27:49,137 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\flask\\sansio\\scaffold.py', reloading
+2026-01-26 22:27:49,139 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\werkzeug\\sansio\\response.py', reloading
+2026-01-26 22:27:49,139 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\werkzeug\\utils.py', reloading
+2026-01-26 22:27:49,144 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\werkzeug\\datastructures\\headers.py', reloading
+2026-01-26 22:27:49,145 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\werkzeug\\_internal.py', reloading
+2026-01-26 22:27:49,146 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\werkzeug\\wrappers\\request.py', reloading
+2026-01-26 22:27:49,147 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\werkzeug\\wrappers\\response.py', reloading
+2026-01-26 22:27:49,148 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\werkzeug\\sansio\\request.py', reloading
+2026-01-26 22:27:49,149 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\boto3\\__init__.py', reloading
+2026-01-26 22:27:49,149 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\botocore\\client.py', reloading
+2026-01-26 22:27:49,150 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\PIL\\ImageFile.py', reloading
+2026-01-26 22:27:49,168 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\PIL\\_typing.py', reloading
+2026-01-26 22:27:49,175 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\dotenv\\__init__.py', reloading
+2026-01-26 22:27:49,176 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\dotenv\\main.py', reloading
+2026-01-26 22:27:49,177 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\torch\\nn\\__init__.py', reloading
+2026-01-26 22:27:49,177 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\torchvision\\models\\__init__.py', reloading
+2026-01-26 22:27:49,178 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\torchvision\\__init__.py', reloading
+2026-01-26 22:27:49,178 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\torchvision\\transforms\\__init__.py', reloading
+2026-01-26 22:27:49,179 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\torch\\types.py', reloading
+2026-01-26 22:27:49,191 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\torch\\_tensor.py', reloading
+2026-01-26 22:27:49,191 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\torch\\storage.py', reloading
+2026-01-26 22:27:49,192 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\torch\\serialization.py', reloading
+2026-01-26 22:27:49,193 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\torch\\autograd\\__init__.py', reloading
+2026-01-26 22:27:49,193 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\torch\\__future__.py', reloading
+2026-01-26 22:27:49,194 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\torch\\jit\\__init__.py', reloading
+2026-01-26 22:27:49,194 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\torch\\_prims_common\\__init__.py', reloading
+2026-01-26 22:27:49,195 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\torch\\_jit_internal.py', reloading
+2026-01-26 22:27:49,195 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\torchvision\\utils.py', reloading
+2026-01-26 22:27:49,196 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\torchvision\\transforms\\transforms.py', reloading
+2026-01-26 22:27:49,196 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\torchvision\\transforms\\autoaugment.py', reloading
+2026-01-26 22:27:49,197 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\torchvision\\transforms\\functional.py', reloading
+2026-01-26 22:27:49,197 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\torchvision\\models\\alexnet.py', reloading
+2026-01-26 22:27:49,198 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\torchvision\\models\\convnext.py', reloading
+2026-01-26 22:27:49,198 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\torchvision\\models\\efficientnet.py', reloading
+2026-01-26 22:27:49,199 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\torchvision\\models\\googlenet.py', reloading
+2026-01-26 22:27:49,199 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\torchvision\\models\\inception.py', reloading
+2026-01-26 22:27:49,200 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\torchvision\\models\\mnasnet.py', reloading
+2026-01-26 22:27:49,200 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\torchvision\\models\\mobilenet.py', reloading
+2026-01-26 22:27:49,201 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\torchvision\\models\\regnet.py', reloading
+2026-01-26 22:27:49,201 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\torchvision\\models\\resnet.py', reloading
+2026-01-26 22:27:49,202 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\torchvision\\models\\shufflenetv2.py', reloading
+2026-01-26 22:27:49,202 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\torchvision\\models\\squeezenet.py', reloading
+2026-01-26 22:27:49,203 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\torchvision\\models\\vgg.py', reloading
+2026-01-26 22:27:49,204 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\torchvision\\models\\vision_transformer.py', reloading
+2026-01-26 22:27:49,204 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\torchvision\\models\\swin_transformer.py', reloading
+2026-01-26 22:27:49,205 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\torchvision\\models\\maxvit.py', reloading
+2026-01-26 22:27:49,207 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\torchvision\\models\\_api.py', reloading
+2026-01-26 22:27:49,208 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\torchvision\\transforms\\_presets.py', reloading
+2026-01-26 22:27:49,208 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\torchvision\\models\\_meta.py', reloading
+2026-01-26 22:27:49,209 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\torchvision\\models\\_utils.py', reloading
+2026-01-26 22:27:49,210 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\torchvision\\models\\mobilenetv2.py', reloading
+2026-01-26 22:27:49,210 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\torchvision\\models\\mobilenetv3.py', reloading
+2026-01-26 22:27:49,211 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\torch\\nn\\modules\\__init__.py', reloading
+2026-01-26 22:27:49,211 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\torch\\nn\\modules\\linear.py', reloading
+2026-01-26 22:27:49,211 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\torch\\nn\\modules\\module.py', reloading
+2026-01-26 22:27:49,212 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\torch\\cuda\\memory.py', reloading
+2026-01-26 22:27:49,212 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\torch\\cuda\\random.py', reloading
+2026-01-26 22:27:49,214 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\torch\\autograd\\grad_mode.py', reloading
+2026-01-26 22:27:49,215 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\torch\\utils\\_contextlib.py', reloading
+2026-01-26 22:27:49,215 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\torch\\jit\\_trace.py', reloading
+2026-01-26 22:27:49,217 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\os.py', reloading
+2026-01-26 22:27:49,220 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\boto3\\compat.py', reloading
+2026-01-26 22:27:49,221 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\boto3\\session.py', reloading
+2026-01-26 22:27:49,222 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\botocore\\__init__.py', reloading
+2026-01-26 22:27:49,222 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\botocore\\session.py', reloading
+2026-01-26 22:27:49,223 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\botocore\\exceptions.py', reloading
+2026-01-26 22:27:49,223 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\botocore\\configloader.py', reloading
+2026-01-26 22:27:49,224 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\botocore\\credentials.py', reloading
+2026-01-26 22:27:49,224 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\botocore\\tokens.py', reloading
+2026-01-26 22:27:49,225 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\botocore\\retryhandler.py', reloading
+2026-01-26 22:27:49,226 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\botocore\\translate.py', reloading
+2026-01-26 22:27:49,226 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\botocore\\compat.py', reloading
+2026-01-26 22:27:49,226 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\botocore\\configprovider.py', reloading
+2026-01-26 22:27:49,227 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\botocore\\context.py', reloading
+2026-01-26 22:27:49,227 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\botocore\\errorfactory.py', reloading
+2026-01-26 22:27:49,228 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\botocore\\hooks.py', reloading
+2026-01-26 22:27:49,228 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\botocore\\model.py', reloading
+2026-01-26 22:27:49,228 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\botocore\\parsers.py', reloading
+2026-01-26 22:27:49,229 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\botocore\\plugin.py', reloading
+2026-01-26 22:27:49,229 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\botocore\\regions.py', reloading
+2026-01-26 22:27:49,230 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\botocore\\useragent.py', reloading
+2026-01-26 22:27:49,230 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\botocore\\utils.py', reloading
+2026-01-26 22:27:49,231 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\botocore\\args.py', reloading
+2026-01-26 22:27:49,231 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\botocore\\auth.py', reloading
+2026-01-26 22:27:49,232 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\botocore\\config.py', reloading
+2026-01-26 22:27:49,232 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\botocore\\discovery.py', reloading
+2026-01-26 22:27:49,233 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\botocore\\history.py', reloading
+2026-01-26 22:27:49,233 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\botocore\\retries\\__init__.py', reloading
+2026-01-26 22:27:49,234 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\botocore\\retries\\adaptive.py', reloading
+2026-01-26 22:27:49,234 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\botocore\\retries\\standard.py', reloading
+2026-01-26 22:27:49,235 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\botocore\\httpsession.py', reloading
+2026-01-26 22:27:49,236 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\botocore\\endpoint.py', reloading
+2026-01-26 22:27:49,237 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\botocore\\serialize.py', reloading
+2026-01-26 22:27:49,237 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\botocore\\signers.py', reloading
+2026-01-26 22:27:49,238 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\botocore\\validate.py', reloading
+2026-01-26 22:27:49,308 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\flask\\config.py', reloading
+2026-01-26 22:27:49,308 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\flask\\templating.py', reloading
+2026-01-26 22:27:49,309 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\jinja2\\__init__.py', reloading
+2026-01-26 22:27:49,314 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\jinja2\\environment.py', reloading
+2026-01-26 22:27:49,319 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\werkzeug\\datastructures\\file_storage.py', reloading
+2026-01-26 22:27:49,320 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\werkzeug\\datastructures\\mixins.py', reloading
+2026-01-26 22:27:49,320 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\werkzeug\\datastructures\\structures.py', reloading
+2026-01-26 22:27:50,136 | INFO |  * Restarting with watchdog (windowsapi)
+2026-01-26 22:27:55,171 | WARNING |  * Debugger is active!
+2026-01-26 22:27:55,174 | INFO |  * Debugger PIN: 140-479-292
