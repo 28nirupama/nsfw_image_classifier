@@ -12,29 +12,22 @@ def _get_s3_client():
     global _s3_client
 
     if not config.S3_UPLOAD_ENABLED:
+        print("S3 Upload is disabled.")
         return None
 
     if _s3_client is None:
-        # Debug: log AWS configuration
-        print(f"DEBUG S3 Config - endpoint: {config.AWS_ENDPOINT_URL}")
-        print(f"DEBUG S3 Config - access_key: {config.AWS_ACCESS_KEY_ID[:8] if config.AWS_ACCESS_KEY_ID else 'None'}...")
-        print(f"DEBUG S3 Config - secret_key: {'***set***' if config.AWS_SECRET_ACCESS_KEY else 'None'}")
-        print(f"DEBUG S3 Config - region: {config.AWS_REGION}")
-
-        if not config.AWS_ACCESS_KEY_ID or not config.AWS_SECRET_ACCESS_KEY:
-            print("Warning: AWS credentials not configured, S3 uploads disabled")
-            return None
-
+        print("Initializing S3 client...")
+        # Your existing initialization code
         _s3_client = boto3.client(
             's3',
             endpoint_url=config.AWS_ENDPOINT_URL,
             aws_access_key_id=config.AWS_ACCESS_KEY_ID,
             aws_secret_access_key=config.AWS_SECRET_ACCESS_KEY,
-            config=BotoConfig(signature_version='s3v4'),
             region_name=config.AWS_REGION
         )
-
+        print("S3 client initialized.")
     return _s3_client
+
 
 
 def upload_reported_image(image_buffer, filename, bucket):
