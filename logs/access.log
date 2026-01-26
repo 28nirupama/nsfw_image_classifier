@@ -374,3 +374,67 @@
 2026-01-26 01:29:01,576 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\Desktop\\nsfw_model\\app.py', reloading
 2026-01-26 01:29:01,591 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\Desktop\\nsfw_model\\app.py', reloading
 2026-01-26 01:29:01,592 | INFO |  * Detected change in 'C:\\Users\\Nirupama mestha\\Desktop\\nsfw_model\\app.py', reloading
+2026-01-26 01:29:02,982 | INFO |  * Restarting with watchdog (windowsapi)
+2026-01-26 01:29:09,224 | WARNING |  * Debugger is active!
+2026-01-26 01:29:09,230 | INFO |  * Debugger PIN: 140-479-292
+2026-01-26 01:29:28,149 | INFO | [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.43.224:5000
+2026-01-26 01:29:28,149 | INFO | [33mPress CTRL+C to quit[0m
+2026-01-26 01:29:28,166 | INFO |  * Restarting with watchdog (windowsapi)
+2026-01-26 01:29:34,439 | WARNING |  * Debugger is active!
+2026-01-26 01:29:34,445 | INFO |  * Debugger PIN: 140-479-292
+2026-01-26 01:30:01,209 | INFO | 127.0.0.1 - - [26/Jan/2026 01:30:01] "GET / HTTP/1.1" 200 -
+2026-01-26 01:30:01,309 | INFO | 127.0.0.1 - - [26/Jan/2026 01:30:01] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-01-26 01:30:01,320 | INFO | 127.0.0.1 - - [26/Jan/2026 01:30:01] "GET /static/js/app.js HTTP/1.1" 200 -
+2026-01-26 01:30:24,395 | INFO | PREDICT_UPLOAD | 12205.59 ms
+2026-01-26 01:30:24,395 | INFO | 127.0.0.1 - - [26/Jan/2026 01:30:24] "POST /predict-upload HTTP/1.1" 200 -
+2026-01-26 01:30:27,546 | INFO | Reported Prediction - Prediction: NSFW, Source: upload, Image URL: None
+2026-01-26 01:30:30,641 | INFO | 127.0.0.1 - - [26/Jan/2026 01:30:30] "POST /report-prediction HTTP/1.1" 200 -
+2026-01-26 01:32:02,726 | INFO | PREDICT_UPLOAD | 3778.05 ms
+2026-01-26 01:32:02,727 | INFO | 127.0.0.1 - - [26/Jan/2026 01:32:02] "POST /predict-upload HTTP/1.1" 200 -
+2026-01-26 01:32:05,805 | INFO | Reported Prediction - Prediction: SFW, Source: upload, Image URL: None
+2026-01-26 01:32:07,731 | INFO | 127.0.0.1 - - [26/Jan/2026 01:32:07] "POST /report-prediction HTTP/1.1" 200 -
+2026-01-26 09:19:20,166 | INFO | [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.30.6:5000
+2026-01-26 09:19:20,167 | INFO | [33mPress CTRL+C to quit[0m
+2026-01-26 09:19:20,180 | INFO |  * Restarting with watchdog (windowsapi)
+2026-01-26 09:19:23,146 | WARNING |  * Debugger is active!
+2026-01-26 09:19:23,151 | INFO |  * Debugger PIN: 140-479-292
+2026-01-26 09:19:27,954 | INFO | 192.168.30.6 - - [26/Jan/2026 09:19:27] "GET / HTTP/1.1" 200 -
+2026-01-26 09:19:28,043 | INFO | 192.168.30.6 - - [26/Jan/2026 09:19:28] "GET /static/css/style.css HTTP/1.1" 200 -
+2026-01-26 09:19:28,043 | INFO | 192.168.30.6 - - [26/Jan/2026 09:19:28] "GET /static/js/app.js HTTP/1.1" 200 -
+2026-01-26 09:19:28,089 | INFO | 192.168.30.6 - - [26/Jan/2026 09:19:28] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2026-01-26 09:20:07,555 | INFO | PREDICT_UPLOAD | 13721.73 ms
+2026-01-26 09:20:07,556 | INFO | 192.168.30.6 - - [26/Jan/2026 09:20:07] "POST /predict-upload HTTP/1.1" 200 -
+2026-01-26 09:20:14,731 | INFO | Reported Prediction - Prediction: NSFW, Source: upload, Image URL: None
+2026-01-26 09:20:21,074 | INFO | Reported Prediction - Prediction: NSFW, Source: upload, Image URL: None
+2026-01-26 09:20:25,102 | INFO | 192.168.30.6 - - [26/Jan/2026 09:20:25] "POST /report-prediction HTTP/1.1" 200 -
+2026-01-26 09:20:30,295 | INFO | 192.168.30.6 - - [26/Jan/2026 09:20:30] "POST /report-prediction HTTP/1.1" 200 -
+2026-01-26 09:28:10,383 | INFO | [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.43.224:5000
+2026-01-26 09:28:10,384 | INFO | [33mPress CTRL+C to quit[0m
+2026-01-26 09:28:10,392 | INFO |  * Restarting with watchdog (windowsapi)
+2026-01-26 09:28:13,085 | WARNING |  * Debugger is active!
+2026-01-26 09:28:13,087 | INFO |  * Debugger PIN: 140-479-292
+2026-01-26 09:28:34,373 | INFO | 127.0.0.1 - - [26/Jan/2026 09:28:34] "GET / HTTP/1.1" 200 -
+2026-01-26 09:28:34,523 | INFO | 127.0.0.1 - - [26/Jan/2026 09:28:34] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-01-26 09:28:34,538 | INFO | 127.0.0.1 - - [26/Jan/2026 09:28:34] "[36mGET /static/js/app.js HTTP/1.1[0m" 304 -
+2026-01-26 09:28:34,548 | INFO | 127.0.0.1 - - [26/Jan/2026 09:28:34] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2026-01-26 09:29:21,308 | INFO | PREDICT_UPLOAD | 20756.03 ms
+2026-01-26 09:29:21,309 | INFO | 127.0.0.1 - - [26/Jan/2026 09:29:21] "POST /predict-upload HTTP/1.1" 200 -
+2026-01-26 09:29:23,780 | INFO | Reported Prediction - Prediction: NSFW, Source: upload, Image URL: None
+2026-01-26 09:29:42,312 | INFO | 127.0.0.1 - - [26/Jan/2026 09:29:42] "POST /report-prediction HTTP/1.1" 200 -
+2026-01-26 09:30:30,590 | INFO | PREDICT_UPLOAD | 6081.46 ms
+2026-01-26 09:30:30,590 | INFO | 127.0.0.1 - - [26/Jan/2026 09:30:30] "POST /predict-upload HTTP/1.1" 200 -
+2026-01-26 09:30:32,783 | INFO | Reported Prediction - Prediction: NSFW, Source: upload, Image URL: None
+2026-01-26 09:30:35,831 | INFO | 127.0.0.1 - - [26/Jan/2026 09:30:35] "POST /report-prediction HTTP/1.1" 200 -
+2026-01-26 09:31:34,330 | INFO | PREDICT_UPLOAD | 18219.72 ms
+2026-01-26 09:31:34,331 | INFO | 127.0.0.1 - - [26/Jan/2026 09:31:34] "POST /predict-upload HTTP/1.1" 200 -
+2026-01-26 09:31:40,840 | INFO | Reported Prediction - Prediction: SFW, Source: upload, Image URL: None
+2026-01-26 09:31:44,210 | INFO | 127.0.0.1 - - [26/Jan/2026 09:31:44] "POST /report-prediction HTTP/1.1" 200 -
