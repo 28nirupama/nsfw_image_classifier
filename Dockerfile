@@ -1,26 +1,37 @@
-# Use official Python 3.10 slim image as a base
 FROM python:3.10-slim
 
-# Set the working directory inside the container
 WORKDIR /app
 
-# Set production environment by default
-# Override with docker run -e FLASK_ENV=development for local testing
 ENV FLASK_ENV=production
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
 
-# Copy the requirements file into the container
+# REQUIRED system dependencies for torch + torchvision
+RUN apt-get update && apt-get install -y \
+    gcc \
+    g++ \
+    libstdc++6 \
+    libgl1 \
+    libglib2.0-0 \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy requirements first
 COPY requirements.txt .
 
-# Install Python dependencies (including Gunicorn)
-RUN pip install --upgrade pip
-RUN pip install --no-cache-dir -r requirements.txt
-RUN pip install gunicorn
+# Upgrade pip & install deps
+RUN pip install --upgrade pip \
+    && pip install --no-cache-dir -r requirements.txt
 
-# Copy the rest of the project files into the container
+# Copy the .env file into the container
+# Copy the .env file into the container (use full path if necessary)
+# Explicitly copy the .env file into the container's working directory
+COPY .env .env
+
+
+
+# Copy app code
 COPY . .
 
-# Expose the port Flask will run on
 EXPOSE 5000
 
-# Set the default command to run the app using Gunicorn in production mode
-CMD ["gunicorn", "--bind", "0.0.0.0:5000", "--workers", "4", "--access-logfile", "-", "app:app"]
+CMD ["gunicorn", "-b", "0.0.0.0:5000", "-w", "4", "app:app"]
